@@ -78,7 +78,7 @@ swappable):
 - Emphasis (circle/underline) draws 200 ms after its element finishes.
 - Gentle pan between layout regions within a scene; 300 ms wipe between scenes.
 
-### 6. Render — `stages/render.ts`
+### 6. Render — `packages/renderer/src/render.ts`
 
 `TimedPlan + audio → out.mp4 + thumbnail.png` via `@remotion/renderer`:
 30 fps, dimensions per aspect ratio (1920×1080 / 1080×1920 / 1080×1080),

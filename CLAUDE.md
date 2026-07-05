@@ -19,7 +19,7 @@ Never add a paid API.
 3. **Assets** — assetTag → SVG line-art path data — `packages/engine/src/assets/`
 4. **Narrate** — ScenePlan → `TimedPlan` (mp3 + word timestamps) — `packages/engine/src/stages/narrate.ts`
 5. **Animate** — Remotion components drawing the TimedPlan — `packages/renderer/src/`
-6. **Render** — TimedPlan + audio → MP4 + thumbnail — `packages/engine/src/stages/render.ts`
+6. **Render** — TimedPlan + audio → MP4 + thumbnail — `packages/renderer/src/render.ts`
 
 Detail: `docs/architecture.md`. Packages: `engine` (pure lib), `renderer`
 (Remotion), `cli` (chalkline CLI), `api` (Fastify).
@@ -59,3 +59,8 @@ deterministic from that JSON.
 - 2026-07-05: v0 skips the "hand following the pen" effect — stroke-draw only; hand overlay is a later upgrade.
 - 2026-07-05: msedge-tts chosen for TTS — free neural voices with WordBoundary timestamps; fallback = estimate timing from duration ÷ word count (logged warning).
 - 2026-07-05: `svg-path-properties` for path-length measurement in Node (no DOM needed).
+- 2026-07-05: Render stage lives in `packages/renderer` (not engine) so the engine never imports Remotion — engine stays a pure planner/audio library.
+- 2026-07-05: pdf-parse v2 (`PDFParse` class API) — v1's function API is gone; ships own types.
+- 2026-07-05: Renderer source uses extensionless relative imports — Remotion's webpack doesn't resolve `.js` → `.tsx`.
+- 2026-07-05: Edge TTS streams can close without `end`; collectors treat close/premature-close as completion.
+- 2026-07-05: The run directory doubles as Remotion's `publicDir`, so narration mp3s resolve via `staticFile()` with zero copying.

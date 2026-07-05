@@ -5,7 +5,11 @@
   "type": "module",
   "main": "src/index.ts",
   "dependencies": {
-    "@chalkline/engine": "workspace:*"
+    "@chalkline/engine": "workspace:*",
+    "@fastify/multipart": "^10.0.0",
+    "dotenv": "^17.4.2",
+    "fastify": "^5.10.0",
+    "@chalkline/renderer": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.14.0"

@@ -6,7 +6,8 @@
   "main": "src/index.ts",
   "dependencies": {
     "@chalkline/engine": "workspace:*",
-    "dotenv": "^17.4.2"
+    "dotenv": "^17.4.2",
+    "@chalkline/renderer": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.14.0"
