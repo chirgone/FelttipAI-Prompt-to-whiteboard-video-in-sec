@@ -1,4 +1,5 @@
 import { mkdirSync } from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { bundle } from "@remotion/bundler";
@@ -49,6 +50,8 @@ export async function renderVideo(
     codec: "h264",
     outputLocation: videoPath,
     inputProps,
+    // Default is half the cores; our frames are cheap 2D, so use almost all.
+    concurrency: Math.max(1, os.availableParallelism() - 1),
     onProgress: ({ progress }) => {
       const percent = Math.floor(progress * 100);
       if (percent >= lastLoggedPercent + 10) {
