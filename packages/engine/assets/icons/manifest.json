@@ -1,0 +1,690 @@
+{
+  "strokeWidth": 5,
+  "viewBox": "0 0 100 100",
+  "icons": {
+    "person": {
+      "file": "person.svg",
+      "synonyms": [
+        "user",
+        "human",
+        "customer",
+        "man",
+        "woman",
+        "individual",
+        "employee"
+      ]
+    },
+    "people": {
+      "file": "people.svg",
+      "synonyms": [
+        "team",
+        "group",
+        "users",
+        "community",
+        "crowd",
+        "customers",
+        "audience"
+      ]
+    },
+    "lightbulb": {
+      "file": "lightbulb.svg",
+      "synonyms": [
+        "idea",
+        "innovation",
+        "insight",
+        "solution",
+        "creativity",
+        "bulb"
+      ]
+    },
+    "gear": {
+      "file": "gear.svg",
+      "synonyms": [
+        "settings",
+        "engine",
+        "machine",
+        "process",
+        "cog",
+        "mechanism",
+        "automation"
+      ]
+    },
+    "chart-up": {
+      "file": "chart-up.svg",
+      "synonyms": [
+        "growth",
+        "increase",
+        "trend",
+        "improvement",
+        "rising",
+        "gains",
+        "progress"
+      ]
+    },
+    "chart-down": {
+      "file": "chart-down.svg",
+      "synonyms": [
+        "decline",
+        "decrease",
+        "loss",
+        "drop",
+        "falling",
+        "reduction",
+        "waste"
+      ]
+    },
+    "money": {
+      "file": "money.svg",
+      "synonyms": [
+        "cash",
+        "banknote",
+        "payment",
+        "revenue",
+        "cost",
+        "price",
+        "funding",
+        "budget"
+      ]
+    },
+    "coin": {
+      "file": "coin.svg",
+      "synonyms": [
+        "dollar",
+        "currency",
+        "profit",
+        "margin",
+        "savings",
+        "wealth"
+      ]
+    },
+    "book": {
+      "file": "book.svg",
+      "synonyms": [
+        "education",
+        "learning",
+        "manual",
+        "knowledge",
+        "guide",
+        "reading",
+        "study"
+      ]
+    },
+    "cloud": {
+      "file": "cloud.svg",
+      "synonyms": [
+        "saas",
+        "internet",
+        "online",
+        "hosting",
+        "sky",
+        "weather"
+      ]
+    },
+    "phone": {
+      "file": "phone.svg",
+      "synonyms": [
+        "mobile",
+        "smartphone",
+        "app",
+        "call",
+        "device",
+        "cell"
+      ]
+    },
+    "laptop": {
+      "file": "laptop.svg",
+      "synonyms": [
+        "computer",
+        "software",
+        "work",
+        "developer",
+        "screen",
+        "pc"
+      ]
+    },
+    "rocket": {
+      "file": "rocket.svg",
+      "synonyms": [
+        "launch",
+        "startup",
+        "fast",
+        "growth-fast",
+        "takeoff",
+        "boost",
+        "scale"
+      ]
+    },
+    "heart": {
+      "file": "heart.svg",
+      "synonyms": [
+        "love",
+        "health",
+        "care",
+        "like",
+        "passion",
+        "wellbeing"
+      ]
+    },
+    "clock": {
+      "file": "clock.svg",
+      "synonyms": [
+        "time",
+        "schedule",
+        "deadline",
+        "duration",
+        "speed",
+        "waiting",
+        "hour"
+      ]
+    },
+    "calendar": {
+      "file": "calendar.svg",
+      "synonyms": [
+        "date",
+        "month",
+        "planning",
+        "appointment",
+        "daily",
+        "week"
+      ]
+    },
+    "globe": {
+      "file": "globe.svg",
+      "synonyms": [
+        "world",
+        "earth",
+        "international",
+        "global",
+        "planet",
+        "worldwide"
+      ]
+    },
+    "shield": {
+      "file": "shield.svg",
+      "synonyms": [
+        "security",
+        "protection",
+        "safety",
+        "defense",
+        "insurance",
+        "trust"
+      ]
+    },
+    "brain": {
+      "file": "brain.svg",
+      "synonyms": [
+        "intelligence",
+        "ai",
+        "thinking",
+        "mind",
+        "smart",
+        "ml",
+        "neural"
+      ]
+    },
+    "magnifier": {
+      "file": "magnifier.svg",
+      "synonyms": [
+        "search",
+        "research",
+        "analysis",
+        "investigate",
+        "find",
+        "discovery",
+        "inspect"
+      ]
+    },
+    "checkmark": {
+      "file": "checkmark.svg",
+      "synonyms": [
+        "done",
+        "success",
+        "correct",
+        "yes",
+        "complete",
+        "approved",
+        "valid"
+      ]
+    },
+    "cross": {
+      "file": "cross.svg",
+      "synonyms": [
+        "no",
+        "wrong",
+        "error",
+        "cancel",
+        "failure",
+        "reject",
+        "delete"
+      ]
+    },
+    "star": {
+      "file": "star.svg",
+      "synonyms": [
+        "favorite",
+        "quality",
+        "rating",
+        "best",
+        "premium",
+        "excellence"
+      ]
+    },
+    "arrow-right": {
+      "file": "arrow-right.svg",
+      "synonyms": [
+        "next",
+        "forward",
+        "direction",
+        "then",
+        "leads-to",
+        "output"
+      ]
+    },
+    "arrow-cycle": {
+      "file": "arrow-cycle.svg",
+      "synonyms": [
+        "cycle",
+        "refresh",
+        "repeat",
+        "recycle",
+        "loop",
+        "iteration",
+        "sync"
+      ]
+    },
+    "speech-bubble": {
+      "file": "speech-bubble.svg",
+      "synonyms": [
+        "chat",
+        "conversation",
+        "message",
+        "talk",
+        "feedback",
+        "communication",
+        "comment"
+      ]
+    },
+    "building": {
+      "file": "building.svg",
+      "synonyms": [
+        "office",
+        "company",
+        "business",
+        "enterprise",
+        "headquarters",
+        "city"
+      ]
+    },
+    "factory": {
+      "file": "factory.svg",
+      "synonyms": [
+        "manufacturing",
+        "industry",
+        "production",
+        "plant",
+        "warehouse"
+      ]
+    },
+    "tree": {
+      "file": "tree.svg",
+      "synonyms": [
+        "nature",
+        "environment",
+        "sustainability",
+        "forest",
+        "green",
+        "organic"
+      ]
+    },
+    "leaf": {
+      "file": "leaf.svg",
+      "synonyms": [
+        "eco",
+        "fresh",
+        "plant",
+        "natural",
+        "produce",
+        "vegetable"
+      ]
+    },
+    "car": {
+      "file": "car.svg",
+      "synonyms": [
+        "vehicle",
+        "drive",
+        "transport",
+        "commute",
+        "automotive"
+      ]
+    },
+    "truck": {
+      "file": "truck.svg",
+      "synonyms": [
+        "delivery",
+        "shipping",
+        "logistics",
+        "freight",
+        "transportation",
+        "fleet"
+      ]
+    },
+    "email": {
+      "file": "email.svg",
+      "synonyms": [
+        "mail",
+        "newsletter",
+        "inbox",
+        "contact",
+        "letter",
+        "notification-mail"
+      ]
+    },
+    "lock": {
+      "file": "lock.svg",
+      "synonyms": [
+        "password",
+        "private",
+        "secure",
+        "encryption",
+        "confidential",
+        "protected"
+      ]
+    },
+    "key": {
+      "file": "key.svg",
+      "synonyms": [
+        "access",
+        "unlock",
+        "credential",
+        "login",
+        "secret",
+        "permission"
+      ]
+    },
+    "graph-bar": {
+      "file": "graph-bar.svg",
+      "synonyms": [
+        "statistics",
+        "metrics",
+        "data",
+        "comparison",
+        "report",
+        "kpi",
+        "analytics"
+      ]
+    },
+    "pie-chart": {
+      "file": "pie-chart.svg",
+      "synonyms": [
+        "share",
+        "portion",
+        "percentage",
+        "segment",
+        "distribution",
+        "split"
+      ]
+    },
+    "target": {
+      "file": "target.svg",
+      "synonyms": [
+        "goal",
+        "aim",
+        "objective",
+        "focus",
+        "bullseye",
+        "precision",
+        "mission"
+      ]
+    },
+    "trophy": {
+      "file": "trophy.svg",
+      "synonyms": [
+        "win",
+        "award",
+        "achievement",
+        "champion",
+        "prize",
+        "victory",
+        "winner"
+      ]
+    },
+    "flag": {
+      "file": "flag.svg",
+      "synonyms": [
+        "milestone",
+        "goal-reached",
+        "country",
+        "finish",
+        "marker",
+        "checkpoint"
+      ]
+    },
+    "fire": {
+      "file": "fire.svg",
+      "synonyms": [
+        "hot",
+        "urgent",
+        "trending",
+        "burn",
+        "energy",
+        "popular",
+        "viral"
+      ]
+    },
+    "sun": {
+      "file": "sun.svg",
+      "synonyms": [
+        "day",
+        "bright",
+        "summer",
+        "solar",
+        "morning",
+        "light",
+        "warm"
+      ]
+    },
+    "database": {
+      "file": "database.svg",
+      "synonyms": [
+        "storage",
+        "records",
+        "data-store",
+        "warehouse-data",
+        "sql",
+        "archive"
+      ]
+    },
+    "server": {
+      "file": "server.svg",
+      "synonyms": [
+        "backend",
+        "infrastructure",
+        "hosting-server",
+        "api",
+        "compute",
+        "system"
+      ]
+    },
+    "question": {
+      "file": "question.svg",
+      "synonyms": [
+        "why",
+        "unknown",
+        "help",
+        "faq",
+        "confusion",
+        "problem",
+        "mystery"
+      ]
+    },
+    "handshake": {
+      "file": "handshake.svg",
+      "synonyms": [
+        "deal",
+        "partnership",
+        "agreement",
+        "contract",
+        "collaboration",
+        "alliance"
+      ]
+    },
+    "scales": {
+      "file": "scales.svg",
+      "synonyms": [
+        "justice",
+        "balance",
+        "law",
+        "fairness",
+        "legal",
+        "compliance",
+        "regulation"
+      ]
+    },
+    "wrench": {
+      "file": "wrench.svg",
+      "synonyms": [
+        "tool",
+        "fix",
+        "repair",
+        "maintenance",
+        "build",
+        "configure"
+      ]
+    },
+    "map-pin": {
+      "file": "map-pin.svg",
+      "synonyms": [
+        "location",
+        "place",
+        "store",
+        "address",
+        "destination",
+        "site",
+        "local"
+      ]
+    },
+    "bell": {
+      "file": "bell.svg",
+      "synonyms": [
+        "notification",
+        "alert",
+        "reminder",
+        "alarm",
+        "announce"
+      ]
+    },
+    "gift": {
+      "file": "gift.svg",
+      "synonyms": [
+        "present",
+        "bonus",
+        "reward",
+        "free",
+        "surprise",
+        "offer"
+      ]
+    },
+    "battery": {
+      "file": "battery.svg",
+      "synonyms": [
+        "power",
+        "charge",
+        "energy-store",
+        "capacity",
+        "sensor-power"
+      ]
+    },
+    "wifi": {
+      "file": "wifi.svg",
+      "synonyms": [
+        "wireless",
+        "signal",
+        "connectivity",
+        "network",
+        "iot",
+        "online-signal"
+      ]
+    },
+    "eye": {
+      "file": "eye.svg",
+      "synonyms": [
+        "vision",
+        "watch",
+        "visibility",
+        "observe",
+        "monitor",
+        "tracking",
+        "view"
+      ]
+    },
+    "thumbs-up": {
+      "file": "thumbs-up.svg",
+      "synonyms": [
+        "approval",
+        "good",
+        "positive",
+        "endorse",
+        "satisfied",
+        "agree"
+      ]
+    },
+    "document": {
+      "file": "document.svg",
+      "synonyms": [
+        "file",
+        "page",
+        "report-doc",
+        "paper",
+        "contract-doc",
+        "invoice",
+        "text"
+      ]
+    },
+    "box": {
+      "file": "box.svg",
+      "synonyms": [
+        "package",
+        "crate",
+        "product",
+        "shipment",
+        "container",
+        "inventory",
+        "parcel"
+      ]
+    },
+    "warning": {
+      "file": "warning.svg",
+      "synonyms": [
+        "risk",
+        "danger",
+        "caution",
+        "alert-warning",
+        "issue",
+        "critical"
+      ]
+    },
+    "snowflake": {
+      "file": "snowflake.svg",
+      "synonyms": [
+        "cold",
+        "freeze",
+        "winter",
+        "cooling",
+        "refrigeration",
+        "frozen",
+        "chill"
+      ]
+    },
+    "thermometer": {
+      "file": "thermometer.svg",
+      "synonyms": [
+        "temperature",
+        "heat",
+        "climate",
+        "fever",
+        "degrees",
+        "measure-temp"
+      ]
+    }
+  }
+}

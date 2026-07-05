@@ -13,5 +13,8 @@
   },
   "devDependencies": {
     "@types/node": "^20.14.0"
+  },
+  "scripts": {
+    "icons": "tsx scripts/generate-icons.ts"
   }
 }
