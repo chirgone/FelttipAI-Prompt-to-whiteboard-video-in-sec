@@ -64,3 +64,4 @@ deterministic from that JSON.
 - 2026-07-05: Renderer source uses extensionless relative imports — Remotion's webpack doesn't resolve `.js` → `.tsx`.
 - 2026-07-05: Edge TTS streams can close without `end`; collectors treat close/premature-close as completion.
 - 2026-07-05: The run directory doubles as Remotion's `publicDir`, so narration mp3s resolve via `staticFile()` with zero copying.
+- 2026-07-05: M5 verified — `pnpm demo` produced a 72s narrated MP4; claude-sonnet-4.5 returned a valid ScenePlan first try. Baseline timings: ingest 0.1s, plan 53.5s, narrate 8.7s, render 649.8s. Render is ~90% of wall clock; optimize there first (draft scale, jpeg frames).
