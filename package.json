@@ -1,0 +1,19 @@
+{
+  "name": "chalkline",
+  "private": true,
+  "version": "0.0.1",
+  "packageManager": "pnpm@10.30.1",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "typecheck": "tsc -p packages/engine && tsc -p packages/renderer && tsc -p packages/cli && tsc -p packages/api",
+    "demo": "tsx packages/cli/src/index.ts run fixtures/sample-pitch.md",
+    "chalkline": "tsx packages/cli/src/index.ts",
+    "api": "tsx packages/api/src/index.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
+  }
+}

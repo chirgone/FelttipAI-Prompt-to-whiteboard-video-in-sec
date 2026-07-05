@@ -1,0 +1,13 @@
+{
+  "name": "@chalkline/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@chalkline/engine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0"
+  }
+}
