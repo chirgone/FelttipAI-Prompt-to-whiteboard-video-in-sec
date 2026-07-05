@@ -19,13 +19,20 @@ export type SourceDocument = z.infer<typeof SourceDocumentSchema>;
 
 export const ElementSchema = z.object({
   id: z.string(),
-  kind: z.enum(["icon", "text", "arrow", "box", "underline", "number"]),
+  kind: z.enum(["icon", "text", "arrow", "line", "box", "underline", "number"]),
   assetTag: z.string().optional(),
   text: z.string().optional(),
   position: z.object({
     x: z.number().min(0).max(1),
     y: z.number().min(0).max(1),
   }),
+  /** For arrow/line: the connector's end point (position is the start). */
+  to: z
+    .object({
+      x: z.number().min(0).max(1),
+      y: z.number().min(0).max(1),
+    })
+    .optional(),
   size: z.number().min(0).max(1),
   revealAtWord: z.number().int().min(0).optional(),
   emphasis: z.enum(["none", "circle", "underline"]).optional(),

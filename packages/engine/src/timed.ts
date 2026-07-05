@@ -31,9 +31,11 @@ export interface TimedElement {
   /** Offset from scene start at which drawing begins. */
   revealAtMs: number;
   drawDurationMs: number;
-  /** Stroke paths in a 0 0 100 100 box; empty for text/number kinds. */
+  /** Stroke paths in a `0 0 <viewBoxWidth> 100` box (all kinds draw). */
   paths: string[];
   pathLengths: number[];
+  /** Width of the element-local coordinate box; height is always 100. */
+  viewBoxWidth?: number;
   /** Set when the asset resolver fell back to box+label. */
   fallbackLabel?: string;
   emphasis?: TimedEmphasis;
