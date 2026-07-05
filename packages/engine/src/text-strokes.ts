@@ -49,7 +49,8 @@ export function textToStrokePaths(text: string): TextStrokes {
         paths.push(transformStroke(`M${stroke}`, xCursor));
       }
     }
-    xCursor += Number(glyph.width) + LETTER_SPACING;
+    const advance = Number(glyph.width);
+    xCursor += (Number.isFinite(advance) ? advance : CAP_HEIGHT * 0.4) + LETTER_SPACING;
   }
   const width = Math.max(1, (xCursor - LETTER_SPACING) * SCALE);
   return { paths, viewBoxWidth: Math.round(width * 10) / 10 };

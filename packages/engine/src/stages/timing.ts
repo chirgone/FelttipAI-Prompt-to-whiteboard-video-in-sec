@@ -176,6 +176,16 @@ function assertComplete(
   durationMs: number,
 ): void {
   for (const el of elements) {
+    if (
+      !Number.isFinite(el.revealAtMs) ||
+      !Number.isFinite(el.drawDurationMs) ||
+      !Number.isFinite(durationMs)
+    ) {
+      throw new StageError(
+        "animate",
+        `${sceneId}/${el.id} has non-finite timing (reveal=${el.revealAtMs}, draw=${el.drawDurationMs}, scene=${durationMs})`,
+      );
+    }
     const drawEnd = el.revealAtMs + el.drawDurationMs;
     const emphasisEnd = el.emphasis
       ? el.emphasis.startMs + el.emphasis.drawDurationMs

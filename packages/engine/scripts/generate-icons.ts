@@ -9,6 +9,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { ASSET_TAGS, type AssetTag } from "../src/assets/tags.js";
+import { measurePaths } from "../src/geometry.js";
 
 // -- tiny path helpers ------------------------------------------------------
 const circle = (cx: number, cy: number, r: number): string =>
@@ -104,7 +105,9 @@ const ICONS: Record<AssetTag, { paths: string[]; synonyms: string[] }> = {
     synonyms: ["education", "learning", "manual", "knowledge", "guide", "reading", "study"],
   },
   cloud: {
-    paths: ["M 28 68 a 13 13 0 1 1 4 -25 a 17 17 0 0 1 33 -3 a 13 13 0 1 1 7 28 Z"],
+    paths: [
+      "M 26 66 C 12 64 8 50 20 44 C 18 30 34 24 44 31 C 50 20 68 22 72 33 C 86 30 94 44 85 52 C 92 62 82 68 72 66 Z",
+    ],
     synonyms: ["saas", "internet", "online", "hosting", "sky", "weather"],
   },
   phone: {
@@ -443,6 +446,8 @@ if (missing.length) throw new Error(`tags without icons: ${missing.join(", ")}`)
 const manifest: Record<string, { file: string; synonyms: string[] }> = {};
 for (const tag of ASSET_TAGS) {
   const { paths, synonyms } = ICONS[tag];
+  // Catch degenerate geometry at authoring time, not at video time.
+  measurePaths(paths);
   const body = paths.map((d) => `  <path d="${d}"/>`).join("\n");
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">\n${body}\n</svg>\n`;
   writeFileSync(path.join(outDir, `${tag}.svg`), svg);

@@ -1,4 +1,5 @@
 import { svgPathProperties } from "svg-path-properties";
+import { StageError } from "./errors.js";
 
 /**
  * Procedural stroke paths for non-icon element kinds and emphasis marks.
@@ -136,7 +137,18 @@ export function connectorGeometry(
 const r1 = (n: number): number => Math.round(n * 10) / 10;
 
 export function measurePaths(paths: string[]): number[] {
-  return paths.map((d) => new svgPathProperties(d).getTotalLength());
+  return paths.map((d) => {
+    const length = new svgPathProperties(d).getTotalLength();
+    if (!Number.isFinite(length)) {
+      // Near-degenerate arcs (endpoints ≈ diameter apart) NaN out in
+      // svg-path-properties; a NaN here silently poisons the whole timeline.
+      throw new StageError(
+        "assets",
+        `path length is not finite (${length}) — likely a degenerate arc: ${d}`,
+      );
+    }
+    return length;
+  });
 }
 
 /** Draw time ∝ total path length, clamped 300–1800ms. */

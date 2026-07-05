@@ -38,7 +38,7 @@
       "elements": [
         { "id": "s3e1", "kind": "icon", "assetTag": "box", "position": { "x": 0.35, "y": 0.3 }, "size": 0.2, "revealAtWord": 3 },
         { "id": "s3e2", "kind": "icon", "assetTag": "thermometer", "position": { "x": 0.62, "y": 0.3 }, "size": 0.17, "revealAtWord": 9, "emphasis": "circle" },
-        { "id": "s3e3", "kind": "arrow", "position": { "x": 0.48, "y": 0.55 }, "size": 0.11, "revealAtWord": 13 },
+        { "id": "s3e3", "kind": "arrow", "position": { "x": 0.38, "y": 0.42 }, "to": { "x": 0.46, "y": 0.68 }, "size": 0.11, "revealAtWord": 13 },
         { "id": "s3e4", "kind": "icon", "assetTag": "wifi", "position": { "x": 0.48, "y": 0.78 }, "size": 0.16, "revealAtWord": 16 }
       ]
     },
