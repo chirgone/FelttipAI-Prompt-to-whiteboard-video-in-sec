@@ -12,7 +12,16 @@ import {
   drawDurationForPaths,
   measurePaths,
   pickVariant,
+  samplePath,
+  washScribblePoints,
 } from "../geometry.js";
+import {
+  INK_ALPHA,
+  PALETTE,
+  WASH_ALPHA,
+  emphasisColor,
+  resolveColor,
+} from "../palette.js";
 import { fitStrokes, textToStrokePaths } from "../text-strokes.js";
 import { ASPECT_DIMENSIONS, type Element, type Scene, type ScenePlan } from "../schemas.js";
 import {
@@ -20,6 +29,7 @@ import {
   type TimedElement,
   type TimedPlan,
   type TimedScene,
+  type TimedStroke,
   type WordTiming,
 } from "../timed.js";
 import { countWords } from "./ingest.js";
@@ -31,6 +41,10 @@ const SCENE_TAIL_MS = 800;
 const EMPHASIS_DELAY_MS = 200;
 /** Every stroke must be fully on screen at least this long before the wipe. */
 const COMPLETION_MARGIN_MS = 400;
+/** Share of an element's draw window spent with the pen lifted between strokes. */
+const PEN_LIFT_SHARE = 0.12;
+/** Beat between an outline finishing and its shade wash starting. */
+const WASH_DELAY_MS = 120;
 
 export interface SceneAudio {
   /** Relative to the run directory. */
@@ -107,6 +121,67 @@ function estimateWords(narration: string): WordTiming[] {
     .map((word, i) => ({ word, startMs: i * ESTIMATED_MS_PER_WORD }));
 }
 
+interface StrokeStyle {
+  color: string;
+  widthFactor: number;
+  alpha: number;
+  mode: TimedStroke["mode"];
+}
+
+/**
+ * Sample paths into polylines and apportion the draw window across them
+ * ∝ length, with pen-lift gaps between strokes — the pacing StrokeDraw used
+ * to compute per frame, now baked into the plan.
+ */
+function buildStrokes(
+  paths: string[],
+  pathLengths: number[],
+  drawDurationMs: number,
+  step: number,
+  style: StrokeStyle,
+): TimedStroke[] {
+  const total = pathLengths.reduce((a, b) => a + b, 0) || 1;
+  const drawMs = drawDurationMs * (1 - PEN_LIFT_SHARE);
+  const liftMs =
+    paths.length > 1 ? (drawDurationMs * PEN_LIFT_SHARE) / (paths.length - 1) : 0;
+  let cursor = 0;
+  return paths.map((d, i) => {
+    const durationMs = ((pathLengths[i] ?? 1) / total) * drawMs;
+    const stroke: TimedStroke = {
+      points: samplePath(d, step),
+      ...style,
+      startMs: Math.round(cursor),
+      durationMs: Math.max(1, Math.round(durationMs)),
+    };
+    cursor += durationMs + liftMs;
+    return stroke;
+  });
+}
+
+const strokesEndMs = (strokes: TimedStroke[]): number =>
+  Math.max(0, ...strokes.map((s) => s.startMs + s.durationMs));
+
+/**
+ * Sample step in element-local units targeting ~2.5px on screen, so partial
+ * strokes stay smooth at any element size without bloating the JSON.
+ */
+function sampleStepFor(size: number, canvasHeight: number): number {
+  return clamp((2.5 * 100) / Math.max(size * canvasHeight, 1), 0.4, 6);
+}
+
+/** Text hierarchy maps to marker weight; shapes draw at base width. */
+function widthFactorFor(el: Element): number {
+  if (el.kind !== "text" && el.kind !== "number") return 1.0;
+  switch (el.textStyle) {
+    case "title":
+      return 1.35;
+    case "big-number":
+      return 1.5;
+    default:
+      return 0.85;
+  }
+}
+
 function resolveElement(
   el: Element,
   index: number,
@@ -121,7 +196,34 @@ function resolveElement(
     canvas,
   );
   const pathLengths = measurePaths(paths);
-  const drawDurationMs = drawDurationForPaths(pathLengths);
+  const size = placement?.size ?? el.size;
+  const step = sampleStepFor(size, canvas.height);
+  const strokes = buildStrokes(paths, pathLengths, drawDurationForPaths(pathLengths), step, {
+    color: resolveColor(el.color),
+    widthFactor: widthFactorFor(el),
+    alpha: INK_ALPHA,
+    mode: "ink",
+  });
+
+  if (el.shade) {
+    // Marker shading: a thick, low-alpha serpentine scribble over the element,
+    // right after its outline lands. Colored elements shade in their own
+    // color; ink elements get the yellow highlighter.
+    const outlineEndMs = strokesEndMs(strokes);
+    const washDurationMs = clamp(Math.round(outlineEndMs * 0.6), 250, 800);
+    strokes.push({
+      points: washScribblePoints(viewBoxWidth ?? 100, 100, 0.08, el.id),
+      color: el.color && el.color !== "ink" ? resolveColor(el.color) : PALETTE.yellow,
+      // The wash pen must be fat enough that serpentine rows overlap; row gap
+      // scales with element size while stroke width is screen-space.
+      widthFactor: clamp(size * 20, 2.5, 12),
+      alpha: WASH_ALPHA,
+      mode: "wash",
+      startMs: Math.round(outlineEndMs + WASH_DELAY_MS),
+      durationMs: washDurationMs,
+    });
+  }
+  const drawDurationMs = Math.round(strokesEndMs(strokes));
 
   let revealAtMs: number;
   if (el.revealAtWord !== undefined && words.length) {
@@ -144,11 +246,22 @@ function resolveElement(
       el.id,
     );
     const emphasisLengths = measurePaths(emphasisPaths);
+    const emphasisStrokes = buildStrokes(
+      emphasisPaths,
+      emphasisLengths,
+      drawDurationForPaths(emphasisLengths),
+      step,
+      {
+        color: emphasisColor(el.color),
+        widthFactor: 1.0,
+        alpha: INK_ALPHA,
+        mode: "ink",
+      },
+    );
     emphasis = {
       kind: emphasisKind,
-      paths: emphasisPaths,
-      pathLengths: emphasisLengths,
-      drawDurationMs: drawDurationForPaths(emphasisLengths),
+      strokes: emphasisStrokes,
+      drawDurationMs: Math.round(strokesEndMs(emphasisStrokes)),
       startMs: revealAtMs + drawDurationMs + EMPHASIS_DELAY_MS,
     };
   }
@@ -158,11 +271,10 @@ function resolveElement(
     kind: el.kind,
     ...(el.text !== undefined ? { text: el.text } : {}),
     position: placement?.position ?? el.position,
-    size: placement?.size ?? el.size,
+    size,
     revealAtMs: Math.round(revealAtMs),
     drawDurationMs,
-    paths,
-    pathLengths,
+    strokes,
     ...(viewBoxWidth !== undefined ? { viewBoxWidth } : {}),
     ...(fallbackLabel !== undefined ? { fallbackLabel } : {}),
     ...(emphasis ? { emphasis } : {}),

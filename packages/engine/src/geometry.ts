@@ -136,6 +136,75 @@ export function connectorGeometry(
 
 const r1 = (n: number): number => Math.round(n * 10) / 10;
 
+export type StrokePoints = [number, number][];
+
+/**
+ * Pre-sample a path into an evenly spaced polyline. This is what ships in the
+ * TimedPlan: the renderer replays point slices, so a partial stroke is an
+ * exact prefix and completion means "all points drawn" — an incomplete final
+ * stroke is structurally impossible.
+ */
+export function samplePath(d: string, step: number): StrokePoints {
+  const props = new svgPathProperties(d);
+  const length = props.getTotalLength();
+  if (!Number.isFinite(length)) {
+    throw new StageError(
+      "assets",
+      `path length is not finite (${length}) — likely a degenerate arc: ${d}`,
+    );
+  }
+  const count = Math.max(2, Math.ceil(length / Math.max(step, 0.05)) + 1);
+  const points: StrokePoints = [];
+  for (let i = 0; i < count; i++) {
+    const p = props.getPointAtLength((length * i) / (count - 1));
+    if (!Number.isFinite(p.x) || !Number.isFinite(p.y)) {
+      throw new StageError("assets", `sampled point is not finite on: ${d}`);
+    }
+    points.push([r2(p.x), r2(p.y)]);
+  }
+  return points;
+}
+
+/**
+ * Marker scribble fill: a serpentine polyline sweeping an inset box, drawn
+ * thick and low-alpha as a shade wash. Wobble varies by id hash so repeated
+ * washes never look stamped.
+ */
+export function washScribblePoints(
+  boxWidth: number,
+  boxHeight: number,
+  insetFrac: number,
+  id: string,
+): StrokePoints {
+  const h = hashString(id);
+  const insetX = boxWidth * insetFrac;
+  const insetY = boxHeight * insetFrac;
+  const left = insetX;
+  const right = boxWidth - insetX;
+  const top = insetY;
+  const bottom = boxHeight - insetY;
+  const rows = Math.max(2, Math.round((bottom - top) / (boxHeight * 0.16)));
+  const rowGap = (bottom - top) / rows;
+  const points: StrokePoints = [];
+  const xStep = Math.max(3, (right - left) / 24);
+  for (let row = 0; row <= rows; row++) {
+    const y = top + row * rowGap;
+    const leftToRight = row % 2 === 0;
+    const wobblePhase = ((h >> (row % 8)) % 7) / 7;
+    for (let x = left; x <= right + 0.01; x += xStep) {
+      const t = (x - left) / (right - left);
+      const drift = Math.sin((t + wobblePhase) * Math.PI * 2) * rowGap * 0.18;
+      // Tilt each pass slightly so the fill reads as hand scribble, not scanlines.
+      const tilt = (leftToRight ? t : 1 - t) * rowGap * 0.35;
+      const px = leftToRight ? x : right - (x - left);
+      points.push([r2(px), r2(clamp(y + drift + tilt, 0, boxHeight))]);
+    }
+  }
+  return points;
+}
+
+const r2 = (n: number): number => Math.round(n * 100) / 100;
+
 export function measurePaths(paths: string[]): number[] {
   return paths.map((d) => {
     const length = new svgPathProperties(d).getTotalLength();

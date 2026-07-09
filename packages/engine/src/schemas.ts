@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { PALETTE_NAMES } from "./palette.js";
 
 // ---------- Stage 1: Ingest ----------
 
@@ -36,6 +37,12 @@ export const ElementSchema = z.object({
   size: z.number().min(0).max(1),
   revealAtWord: z.number().int().min(0).optional(),
   emphasis: z.enum(["none", "circle", "underline"]).optional(),
+  /** Marker color by palette name; defaults to ink. */
+  color: z.enum(PALETTE_NAMES).optional(),
+  /** Low-alpha colored wash scribbled over the element after its outline. */
+  shade: z.boolean().optional(),
+  /** Text hierarchy: size/weight treatment for text and number elements. */
+  textStyle: z.enum(["title", "label", "big-number"]).optional(),
 });
 export type Element = z.infer<typeof ElementSchema>;
 

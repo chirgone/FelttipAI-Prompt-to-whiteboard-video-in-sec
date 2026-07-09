@@ -9,11 +9,12 @@
       "durationHintSec": 10,
       "layout": "split",
       "elements": [
-        { "id": "s1e1", "kind": "icon", "assetTag": "building", "position": { "x": 0.28, "y": 0.42 }, "size": 0.26, "revealAtWord": 0 },
-        { "id": "s1e2", "kind": "icon", "assetTag": "leaf", "position": { "x": 0.5, "y": 0.42 }, "size": 0.18, "revealAtWord": 8 },
-        { "id": "s1e3", "kind": "icon", "assetTag": "cross", "position": { "x": 0.5, "y": 0.42 }, "size": 0.2, "revealAtWord": 12 },
-        { "id": "s1e4", "kind": "number", "text": "-4%", "position": { "x": 0.74, "y": 0.4 }, "size": 0.12, "revealAtWord": 18, "emphasis": "circle" },
-        { "id": "s1e5", "kind": "text", "text": "of revenue, wasted", "position": { "x": 0.74, "y": 0.62 }, "size": 0.055, "revealAtWord": 21 }
+        { "id": "s1t", "kind": "text", "text": "The Waste Problem", "textStyle": "title", "color": "red", "position": { "x": 0.5, "y": 0.12 }, "size": 0.09, "revealAtWord": 0 },
+        { "id": "s1e1", "kind": "icon", "assetTag": "building", "color": "blue", "position": { "x": 0.28, "y": 0.48 }, "size": 0.26, "revealAtWord": 0 },
+        { "id": "s1e2", "kind": "icon", "assetTag": "leaf", "color": "green", "shade": true, "position": { "x": 0.5, "y": 0.48 }, "size": 0.18, "revealAtWord": 8 },
+        { "id": "s1e3", "kind": "icon", "assetTag": "cross", "color": "red", "position": { "x": 0.5, "y": 0.48 }, "size": 0.2, "revealAtWord": 12 },
+        { "id": "s1e4", "kind": "number", "text": "-4%", "textStyle": "big-number", "color": "red", "shade": true, "position": { "x": 0.74, "y": 0.45 }, "size": 0.14, "revealAtWord": 18, "emphasis": "circle" },
+        { "id": "s1e5", "kind": "text", "text": "of revenue, wasted", "position": { "x": 0.74, "y": 0.66 }, "size": 0.055, "revealAtWord": 21 }
       ]
     },
     {
@@ -22,12 +23,13 @@
       "durationHintSec": 9,
       "layout": "timeline",
       "elements": [
-        { "id": "s2e1", "kind": "icon", "assetTag": "truck", "position": { "x": 0.2, "y": 0.45 }, "size": 0.2, "revealAtWord": 4 },
-        { "id": "s2e2", "kind": "arrow", "position": { "x": 0.38, "y": 0.45 }, "size": 0.1, "revealAtWord": 6 },
-        { "id": "s2e3", "kind": "icon", "assetTag": "clock", "position": { "x": 0.53, "y": 0.45 }, "size": 0.18, "revealAtWord": 8, "emphasis": "underline" },
-        { "id": "s2e4", "kind": "arrow", "position": { "x": 0.68, "y": 0.45 }, "size": 0.1, "revealAtWord": 13 },
-        { "id": "s2e5", "kind": "icon", "assetTag": "warning", "position": { "x": 0.83, "y": 0.45 }, "size": 0.18, "revealAtWord": 16 },
-        { "id": "s2e6", "kind": "text", "text": "expired in the back room", "position": { "x": 0.68, "y": 0.72 }, "size": 0.05, "revealAtWord": 18 }
+        { "id": "s2t", "kind": "text", "text": "Why It Happens", "textStyle": "title", "color": "orange", "position": { "x": 0.5, "y": 0.12 }, "size": 0.085, "revealAtWord": 0 },
+        { "id": "s2e1", "kind": "icon", "assetTag": "truck", "color": "blue", "position": { "x": 0.2, "y": 0.5 }, "size": 0.2, "revealAtWord": 4 },
+        { "id": "s2e2", "kind": "arrow", "color": "ink", "position": { "x": 0.31, "y": 0.5 }, "to": { "x": 0.42, "y": 0.5 }, "size": 0.1, "revealAtWord": 6 },
+        { "id": "s2e3", "kind": "icon", "assetTag": "clock", "color": "orange", "position": { "x": 0.53, "y": 0.5 }, "size": 0.18, "revealAtWord": 8, "emphasis": "underline" },
+        { "id": "s2e4", "kind": "arrow", "color": "ink", "position": { "x": 0.64, "y": 0.5 }, "to": { "x": 0.74, "y": 0.5 }, "size": 0.1, "revealAtWord": 13 },
+        { "id": "s2e5", "kind": "icon", "assetTag": "warning", "color": "red", "shade": true, "position": { "x": 0.85, "y": 0.5 }, "size": 0.18, "revealAtWord": 16 },
+        { "id": "s2e6", "kind": "text", "text": "expired in the back room", "color": "red", "position": { "x": 0.7, "y": 0.76 }, "size": 0.05, "revealAtWord": 18 }
       ]
     },
     {
@@ -36,10 +38,11 @@
       "durationHintSec": 9,
       "layout": "flow",
       "elements": [
-        { "id": "s3e1", "kind": "icon", "assetTag": "box", "position": { "x": 0.35, "y": 0.3 }, "size": 0.2, "revealAtWord": 3 },
-        { "id": "s3e2", "kind": "icon", "assetTag": "thermometer", "position": { "x": 0.62, "y": 0.3 }, "size": 0.17, "revealAtWord": 9, "emphasis": "circle" },
-        { "id": "s3e3", "kind": "arrow", "position": { "x": 0.38, "y": 0.42 }, "to": { "x": 0.46, "y": 0.68 }, "size": 0.11, "revealAtWord": 13 },
-        { "id": "s3e4", "kind": "icon", "assetTag": "wifi", "position": { "x": 0.48, "y": 0.78 }, "size": 0.16, "revealAtWord": 16 }
+        { "id": "s3t", "kind": "text", "text": "The FreshRoute Fix", "textStyle": "title", "color": "green", "position": { "x": 0.5, "y": 0.12 }, "size": 0.085, "revealAtWord": 0 },
+        { "id": "s3e1", "kind": "icon", "assetTag": "box", "color": "teal", "position": { "x": 0.35, "y": 0.36 }, "size": 0.2, "revealAtWord": 3 },
+        { "id": "s3e2", "kind": "icon", "assetTag": "thermometer", "color": "blue", "position": { "x": 0.62, "y": 0.36 }, "size": 0.17, "revealAtWord": 9, "emphasis": "circle" },
+        { "id": "s3e3", "kind": "arrow", "color": "green", "position": { "x": 0.38, "y": 0.48 }, "to": { "x": 0.46, "y": 0.72 }, "size": 0.11, "revealAtWord": 13 },
+        { "id": "s3e4", "kind": "icon", "assetTag": "wifi", "color": "purple", "shade": true, "position": { "x": 0.48, "y": 0.8 }, "size": 0.16, "revealAtWord": 16 }
       ]
     },
     {
@@ -48,10 +51,11 @@
       "durationHintSec": 12,
       "layout": "center",
       "elements": [
-        { "id": "s4e1", "kind": "icon", "assetTag": "chart-down", "position": { "x": 0.32, "y": 0.42 }, "size": 0.24, "revealAtWord": 10 },
-        { "id": "s4e2", "kind": "number", "text": "-38%", "position": { "x": 0.62, "y": 0.38 }, "size": 0.13, "revealAtWord": 14, "emphasis": "underline" },
-        { "id": "s4e3", "kind": "box", "position": { "x": 0.62, "y": 0.38 }, "size": 0.2, "revealAtWord": 17 },
-        { "id": "s4e4", "kind": "icon", "assetTag": "checkmark", "position": { "x": 0.47, "y": 0.72 }, "size": 0.12, "revealAtWord": 22 }
+        { "id": "s4t", "kind": "text", "text": "Pilot Results", "textStyle": "title", "color": "green", "position": { "x": 0.5, "y": 0.12 }, "size": 0.09, "revealAtWord": 0 },
+        { "id": "s4e1", "kind": "icon", "assetTag": "chart-down", "color": "green", "position": { "x": 0.32, "y": 0.48 }, "size": 0.24, "revealAtWord": 10 },
+        { "id": "s4e2", "kind": "number", "text": "-38%", "textStyle": "big-number", "color": "green", "shade": true, "position": { "x": 0.62, "y": 0.44 }, "size": 0.14, "revealAtWord": 14, "emphasis": "underline" },
+        { "id": "s4e3", "kind": "box", "color": "blue", "position": { "x": 0.62, "y": 0.44 }, "size": 0.22, "revealAtWord": 17 },
+        { "id": "s4e4", "kind": "icon", "assetTag": "checkmark", "color": "green", "shade": true, "position": { "x": 0.47, "y": 0.78 }, "size": 0.12, "revealAtWord": 22 }
       ]
     }
   ]

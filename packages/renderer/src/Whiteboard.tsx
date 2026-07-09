@@ -1,7 +1,7 @@
 import React from "react";
-import { AbsoluteFill, Sequence, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig } from "remotion";
 import type { TimedPlan } from "@chalkline/engine";
-import { SceneView } from "./SceneView";
+import { WhiteboardCanvas } from "./WhiteboardCanvas";
 import { PAPER_NOISE_URI, THEME } from "./theme";
 
 export const Whiteboard: React.FC<{ plan: TimedPlan }> = ({ plan }) => {
@@ -20,7 +20,8 @@ export const Whiteboard: React.FC<{ plan: TimedPlan }> = ({ plan }) => {
           durationInFrames={Math.max(1, msToFrames(scene.durationMs))}
           name={scene.id}
         >
-          <SceneView scene={scene} isFirst={i === 0} />
+          {scene.audioFile !== undefined && <Audio src={staticFile(scene.audioFile)} />}
+          <WhiteboardCanvas scene={scene} isFirst={i === 0} />
         </Sequence>
       ))}
     </AbsoluteFill>
