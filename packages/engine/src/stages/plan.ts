@@ -11,7 +11,18 @@ import {
   type ScenePlan,
   type SourceDocument,
 } from "../schemas.js";
+import type { PaletteColor } from "../palette.js";
 import { countWords } from "./ingest.js";
+
+/** Rotation for icons the model left colorless — a whiteboard is never gray. */
+const AUTO_ICON_COLORS: PaletteColor[] = [
+  "blue",
+  "green",
+  "orange",
+  "purple",
+  "teal",
+  "red",
+];
 
 export async function plan(
   doc: SourceDocument,
@@ -57,9 +68,15 @@ function normalize(scenePlan: ScenePlan, options: PlanOptions): ScenePlan {
     );
     scenePlan = { ...scenePlan, aspectRatio: options.aspectRatio };
   }
+  let colorCursor = 0;
   for (const scene of scenePlan.scenes) {
     const wordCount = countWords(scene.narration);
+    let autoColored = 0;
     for (const el of scene.elements) {
+      if (el.kind === "icon" && !el.color) {
+        el.color = AUTO_ICON_COLORS[colorCursor++ % AUTO_ICON_COLORS.length];
+        autoColored++;
+      }
       if (el.revealAtWord !== undefined && el.revealAtWord >= wordCount) {
         warn(
           "plan",
@@ -67,6 +84,9 @@ function normalize(scenePlan: ScenePlan, options: PlanOptions): ScenePlan {
         );
         el.revealAtWord = wordCount - 1;
       }
+    }
+    if (autoColored > 0) {
+      warn("plan", `${scene.id}: auto-colored ${autoColored} colorless icon(s)`);
     }
     // Drawing order must follow reveal order regardless of what the model emitted.
     scene.elements.sort((a, b) => (a.revealAtWord ?? 0) - (b.revealAtWord ?? 0));

@@ -174,11 +174,11 @@ function widthFactorFor(el: Element): number {
   if (el.kind !== "text" && el.kind !== "number") return 1.0;
   switch (el.textStyle) {
     case "title":
-      return 1.35;
+      return 1.7;
     case "big-number":
-      return 1.5;
+      return 1.9;
     default:
-      return 0.85;
+      return 1.15;
   }
 }
 
@@ -190,26 +190,43 @@ function resolveElement(
   audioDurationMs: number,
   canvas: { width: number; height: number },
 ): TimedElement {
-  const { paths, viewBoxWidth, fallbackLabel, placement } = pathsForElement(
-    el,
-    scene,
-    canvas,
-  );
+  const { paths, viewBoxWidth, fallbackLabel, placement, fillPaths } =
+    pathsForElement(el, scene, canvas);
   const pathLengths = measurePaths(paths);
   const size = placement?.size ?? el.size;
   const step = sampleStepFor(size, canvas.height);
+  // Icons that get a color fill draw their outline in ink — colored strokes
+  // on a same-color fill make interior detail (windows, hands, faces) vanish.
+  const willFill =
+    Boolean(fillPaths?.length) && el.color !== undefined && el.color !== "ink";
   const strokes = buildStrokes(paths, pathLengths, drawDurationForPaths(pathLengths), step, {
-    color: resolveColor(el.color),
+    color: willFill ? resolveColor("ink") : resolveColor(el.color),
     widthFactor: widthFactorFor(el),
     alpha: INK_ALPHA,
     mode: "ink",
   });
 
-  if (el.shade) {
+  // The outline is what must land on the spoken word; fills and washes trail.
+  const outlineEndMs = strokesEndMs(strokes);
+
+  // Simi look: flood the icon silhouette with its flat marker color right
+  // after the outline lands, under the ink strokes.
+  let fill: TimedElement["fill"];
+  if (fillPaths?.length && el.color && el.color !== "ink") {
+    fill = {
+      paths: fillPaths,
+      color: resolveColor(el.color),
+      startMs: Math.round(outlineEndMs + WASH_DELAY_MS),
+      durationMs: 300,
+    };
+  }
+
+  if (el.shade && !fill) {
     // Marker shading: a thick, low-alpha serpentine scribble over the element,
     // right after its outline lands. Colored elements shade in their own
-    // color; ink elements get the yellow highlighter.
-    const outlineEndMs = strokesEndMs(strokes);
+    // color; ink elements get the yellow highlighter. Filled icons skip it —
+    // the flat fill already is the color pop, and the scribble spilling past
+    // the silhouette reads as mess.
     const washDurationMs = clamp(Math.round(outlineEndMs * 0.6), 250, 800);
     strokes.push({
       points: washScribblePoints(viewBoxWidth ?? 100, 100, 0.08, el.id),
@@ -223,13 +240,18 @@ function resolveElement(
       durationMs: washDurationMs,
     });
   }
-  const drawDurationMs = Math.round(strokesEndMs(strokes));
+  const drawDurationMs = Math.round(
+    Math.max(strokesEndMs(strokes), fill ? fill.startMs + fill.durationMs : 0),
+  );
 
   let revealAtMs: number;
   if (el.revealAtWord !== undefined && words.length) {
-    // Word-sync is sacred: the reveal lands exactly on the spoken word.
+    // Word-sync means the drawing COMPLETES on the spoken word — the pen
+    // starts early so ink and voice land together (starting on the word made
+    // every visual finish 1-2s late, which reads as lag).
     const wordIndex = clamp(el.revealAtWord, 0, words.length - 1);
-    revealAtMs = words[wordIndex]!.startMs;
+    const lead = Math.min(outlineEndMs * 0.85, 1600);
+    revealAtMs = Math.max(0, words[wordIndex]!.startMs - lead);
   } else {
     // No explicit timing: spread elements evenly across the narration.
     revealAtMs = Math.max(
@@ -277,6 +299,7 @@ function resolveElement(
     strokes,
     ...(viewBoxWidth !== undefined ? { viewBoxWidth } : {}),
     ...(fallbackLabel !== undefined ? { fallbackLabel } : {}),
+    ...(fill ? { fill } : {}),
     ...(emphasis ? { emphasis } : {}),
   };
 }
@@ -315,6 +338,8 @@ interface ElementPaths {
   paths: string[];
   viewBoxWidth?: number;
   fallbackLabel?: string;
+  /** Icon silhouette paths to flood with the element color. */
+  fillPaths?: string[];
   /** Connectors compute their own bounding box; overrides position/size. */
   placement?: { position: { x: number; y: number }; size: number };
 }
@@ -345,7 +370,7 @@ function pathsForElement(
       const asset = resolveAsset(el.assetTag);
       return asset.matched === "fallback"
         ? boxWithLabel(asset.label ?? el.assetTag)
-        : { paths: asset.paths };
+        : { paths: asset.paths, fillPaths: asset.fillPaths };
     }
     case "arrow":
     case "line": {

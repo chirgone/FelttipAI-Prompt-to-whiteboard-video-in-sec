@@ -34,6 +34,17 @@ export interface TimedStroke {
   durationMs: number;
 }
 
+export interface TimedFill {
+  /** SVG path `d` strings in element-local coords, flooded with `color`. */
+  paths: string[];
+  /** Resolved hex — flat marker color under the ink outline. */
+  color: string;
+  /** Fade-in start, offset from element reveal (after the outline lands). */
+  startMs: number;
+  /** Fade-in length. */
+  durationMs: number;
+}
+
 export interface TimedEmphasis {
   kind: "circle" | "underline";
   /** Stroke startMs offsets are relative to this emphasis's startMs. */
@@ -58,6 +69,8 @@ export interface TimedElement {
   viewBoxWidth?: number;
   /** Set when the asset resolver fell back to box+label. */
   fallbackLabel?: string;
+  /** Flat color fill under the outline (Simi look); icons only. */
+  fill?: TimedFill;
   emphasis?: TimedEmphasis;
 }
 

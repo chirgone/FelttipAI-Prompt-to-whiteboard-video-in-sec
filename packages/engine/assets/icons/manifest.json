@@ -12,6 +12,10 @@
         "woman",
         "individual",
         "employee"
+      ],
+      "fill": [
+        0,
+        1
       ]
     },
     "people": {
@@ -24,6 +28,73 @@
         "crowd",
         "customers",
         "audience"
+      ],
+      "fill": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "person-teaching": {
+      "file": "person-teaching.svg",
+      "synonyms": [
+        "teacher",
+        "teaching",
+        "instructor",
+        "presenter",
+        "explain",
+        "lesson",
+        "classroom"
+      ],
+      "fill": [
+        0,
+        3,
+        4
+      ]
+    },
+    "person-reading": {
+      "file": "person-reading.svg",
+      "synonyms": [
+        "reader",
+        "student",
+        "studying",
+        "learner",
+        "reading"
+      ],
+      "fill": [
+        0,
+        1
+      ]
+    },
+    "person-idea": {
+      "file": "person-idea.svg",
+      "synonyms": [
+        "thinker",
+        "eureka",
+        "inventor",
+        "aha",
+        "insight-person",
+        "genius"
+      ],
+      "fill": [
+        0,
+        1
+      ]
+    },
+    "person-question": {
+      "file": "person-question.svg",
+      "synonyms": [
+        "confused",
+        "thinking",
+        "wondering",
+        "doubt",
+        "puzzled",
+        "curious"
+      ],
+      "fill": [
+        0,
+        1
       ]
     },
     "lightbulb": {
@@ -35,6 +106,9 @@
         "solution",
         "creativity",
         "bulb"
+      ],
+      "fill": [
+        0
       ]
     },
     "gear": {
@@ -47,6 +121,9 @@
         "cog",
         "mechanism",
         "automation"
+      ],
+      "fill": [
+        0
       ]
     },
     "chart-up": {
@@ -59,7 +136,8 @@
         "rising",
         "gains",
         "progress"
-      ]
+      ],
+      "fill": []
     },
     "chart-down": {
       "file": "chart-down.svg",
@@ -71,7 +149,8 @@
         "falling",
         "reduction",
         "waste"
-      ]
+      ],
+      "fill": []
     },
     "money": {
       "file": "money.svg",
@@ -84,6 +163,9 @@
         "price",
         "funding",
         "budget"
+      ],
+      "fill": [
+        0
       ]
     },
     "coin": {
@@ -95,6 +177,9 @@
         "margin",
         "savings",
         "wealth"
+      ],
+      "fill": [
+        0
       ]
     },
     "book": {
@@ -107,6 +192,9 @@
         "guide",
         "reading",
         "study"
+      ],
+      "fill": [
+        0
       ]
     },
     "cloud": {
@@ -118,6 +206,9 @@
         "hosting",
         "sky",
         "weather"
+      ],
+      "fill": [
+        0
       ]
     },
     "phone": {
@@ -129,6 +220,9 @@
         "call",
         "device",
         "cell"
+      ],
+      "fill": [
+        0
       ]
     },
     "laptop": {
@@ -140,6 +234,9 @@
         "developer",
         "screen",
         "pc"
+      ],
+      "fill": [
+        0
       ]
     },
     "rocket": {
@@ -152,6 +249,11 @@
         "takeoff",
         "boost",
         "scale"
+      ],
+      "fill": [
+        0,
+        2,
+        3
       ]
     },
     "heart": {
@@ -163,6 +265,9 @@
         "like",
         "passion",
         "wellbeing"
+      ],
+      "fill": [
+        0
       ]
     },
     "clock": {
@@ -175,6 +280,9 @@
         "speed",
         "waiting",
         "hour"
+      ],
+      "fill": [
+        0
       ]
     },
     "calendar": {
@@ -186,6 +294,9 @@
         "appointment",
         "daily",
         "week"
+      ],
+      "fill": [
+        0
       ]
     },
     "globe": {
@@ -197,6 +308,9 @@
         "global",
         "planet",
         "worldwide"
+      ],
+      "fill": [
+        0
       ]
     },
     "shield": {
@@ -208,6 +322,9 @@
         "defense",
         "insurance",
         "trust"
+      ],
+      "fill": [
+        0
       ]
     },
     "brain": {
@@ -220,6 +337,10 @@
         "smart",
         "ml",
         "neural"
+      ],
+      "fill": [
+        0,
+        1
       ]
     },
     "magnifier": {
@@ -232,6 +353,9 @@
         "find",
         "discovery",
         "inspect"
+      ],
+      "fill": [
+        0
       ]
     },
     "checkmark": {
@@ -244,7 +368,8 @@
         "complete",
         "approved",
         "valid"
-      ]
+      ],
+      "fill": []
     },
     "cross": {
       "file": "cross.svg",
@@ -256,7 +381,8 @@
         "failure",
         "reject",
         "delete"
-      ]
+      ],
+      "fill": []
     },
     "star": {
       "file": "star.svg",
@@ -267,6 +393,9 @@
         "best",
         "premium",
         "excellence"
+      ],
+      "fill": [
+        0
       ]
     },
     "arrow-right": {
@@ -278,6 +407,9 @@
         "then",
         "leads-to",
         "output"
+      ],
+      "fill": [
+        1
       ]
     },
     "arrow-cycle": {
@@ -290,7 +422,8 @@
         "loop",
         "iteration",
         "sync"
-      ]
+      ],
+      "fill": []
     },
     "speech-bubble": {
       "file": "speech-bubble.svg",
@@ -302,6 +435,10 @@
         "feedback",
         "communication",
         "comment"
+      ],
+      "fill": [
+        0,
+        1
       ]
     },
     "building": {
@@ -313,6 +450,9 @@
         "enterprise",
         "headquarters",
         "city"
+      ],
+      "fill": [
+        0
       ]
     },
     "factory": {
@@ -323,6 +463,9 @@
         "production",
         "plant",
         "warehouse"
+      ],
+      "fill": [
+        0
       ]
     },
     "tree": {
@@ -334,6 +477,9 @@
         "forest",
         "green",
         "organic"
+      ],
+      "fill": [
+        0
       ]
     },
     "leaf": {
@@ -345,6 +491,9 @@
         "natural",
         "produce",
         "vegetable"
+      ],
+      "fill": [
+        0
       ]
     },
     "car": {
@@ -355,6 +504,9 @@
         "transport",
         "commute",
         "automotive"
+      ],
+      "fill": [
+        0
       ]
     },
     "truck": {
@@ -366,6 +518,10 @@
         "freight",
         "transportation",
         "fleet"
+      ],
+      "fill": [
+        0,
+        1
       ]
     },
     "email": {
@@ -377,6 +533,9 @@
         "contact",
         "letter",
         "notification-mail"
+      ],
+      "fill": [
+        0
       ]
     },
     "lock": {
@@ -388,6 +547,9 @@
         "encryption",
         "confidential",
         "protected"
+      ],
+      "fill": [
+        1
       ]
     },
     "key": {
@@ -399,6 +561,9 @@
         "login",
         "secret",
         "permission"
+      ],
+      "fill": [
+        0
       ]
     },
     "graph-bar": {
@@ -411,6 +576,11 @@
         "report",
         "kpi",
         "analytics"
+      ],
+      "fill": [
+        1,
+        2,
+        3
       ]
     },
     "pie-chart": {
@@ -422,6 +592,9 @@
         "segment",
         "distribution",
         "split"
+      ],
+      "fill": [
+        0
       ]
     },
     "target": {
@@ -434,6 +607,9 @@
         "bullseye",
         "precision",
         "mission"
+      ],
+      "fill": [
+        2
       ]
     },
     "trophy": {
@@ -446,6 +622,9 @@
         "prize",
         "victory",
         "winner"
+      ],
+      "fill": [
+        0
       ]
     },
     "flag": {
@@ -457,6 +636,9 @@
         "finish",
         "marker",
         "checkpoint"
+      ],
+      "fill": [
+        1
       ]
     },
     "fire": {
@@ -469,6 +651,9 @@
         "energy",
         "popular",
         "viral"
+      ],
+      "fill": [
+        0
       ]
     },
     "sun": {
@@ -481,6 +666,9 @@
         "morning",
         "light",
         "warm"
+      ],
+      "fill": [
+        0
       ]
     },
     "database": {
@@ -492,7 +680,8 @@
         "warehouse-data",
         "sql",
         "archive"
-      ]
+      ],
+      "fill": []
     },
     "server": {
       "file": "server.svg",
@@ -503,6 +692,10 @@
         "api",
         "compute",
         "system"
+      ],
+      "fill": [
+        0,
+        1
       ]
     },
     "question": {
@@ -515,7 +708,8 @@
         "confusion",
         "problem",
         "mystery"
-      ]
+      ],
+      "fill": []
     },
     "handshake": {
       "file": "handshake.svg",
@@ -526,7 +720,8 @@
         "contract",
         "collaboration",
         "alliance"
-      ]
+      ],
+      "fill": []
     },
     "scales": {
       "file": "scales.svg",
@@ -538,7 +733,8 @@
         "legal",
         "compliance",
         "regulation"
-      ]
+      ],
+      "fill": []
     },
     "wrench": {
       "file": "wrench.svg",
@@ -549,6 +745,10 @@
         "maintenance",
         "build",
         "configure"
+      ],
+      "fill": [
+        0,
+        2
       ]
     },
     "map-pin": {
@@ -561,6 +761,9 @@
         "destination",
         "site",
         "local"
+      ],
+      "fill": [
+        0
       ]
     },
     "bell": {
@@ -571,6 +774,9 @@
         "reminder",
         "alarm",
         "announce"
+      ],
+      "fill": [
+        0
       ]
     },
     "gift": {
@@ -582,6 +788,10 @@
         "free",
         "surprise",
         "offer"
+      ],
+      "fill": [
+        0,
+        1
       ]
     },
     "battery": {
@@ -592,6 +802,9 @@
         "energy-store",
         "capacity",
         "sensor-power"
+      ],
+      "fill": [
+        0
       ]
     },
     "wifi": {
@@ -603,7 +816,8 @@
         "network",
         "iot",
         "online-signal"
-      ]
+      ],
+      "fill": []
     },
     "eye": {
       "file": "eye.svg",
@@ -615,6 +829,9 @@
         "monitor",
         "tracking",
         "view"
+      ],
+      "fill": [
+        1
       ]
     },
     "thumbs-up": {
@@ -626,6 +843,10 @@
         "endorse",
         "satisfied",
         "agree"
+      ],
+      "fill": [
+        0,
+        1
       ]
     },
     "document": {
@@ -638,6 +859,9 @@
         "contract-doc",
         "invoice",
         "text"
+      ],
+      "fill": [
+        0
       ]
     },
     "box": {
@@ -650,6 +874,9 @@
         "container",
         "inventory",
         "parcel"
+      ],
+      "fill": [
+        0
       ]
     },
     "warning": {
@@ -661,6 +888,9 @@
         "alert-warning",
         "issue",
         "critical"
+      ],
+      "fill": [
+        0
       ]
     },
     "snowflake": {
@@ -673,7 +903,8 @@
         "refrigeration",
         "frozen",
         "chill"
-      ]
+      ],
+      "fill": []
     },
     "thermometer": {
       "file": "thermometer.svg",
@@ -684,6 +915,9 @@
         "fever",
         "degrees",
         "measure-temp"
+      ],
+      "fill": [
+        1
       ]
     }
   }

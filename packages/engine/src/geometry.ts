@@ -223,12 +223,12 @@ export function measurePaths(paths: string[]): number[] {
 /** Draw time ∝ total path length, clamped 300–1800ms. */
 export function drawDurationForPaths(pathLengths: number[]): number {
   const total = pathLengths.reduce((a, b) => a + b, 0);
-  return clamp(Math.round(total * 3), 300, 1800);
+  return clamp(Math.round(total * 2.2), 280, 1300);
 }
 
 /** Text has no measurable path; scale with glyph count instead. */
 export function drawDurationForText(text: string): number {
-  return clamp(text.length * 55, 300, 1200);
+  return clamp(text.length * 45, 280, 950);
 }
 
 export function clamp(n: number, lo: number, hi: number): number {

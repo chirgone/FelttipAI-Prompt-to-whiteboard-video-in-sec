@@ -5,6 +5,10 @@
 export const ASSET_TAGS = [
   "person",
   "people",
+  "person-teaching",
+  "person-reading",
+  "person-idea",
+  "person-question",
   "lightbulb",
   "gear",
   "chart-up",

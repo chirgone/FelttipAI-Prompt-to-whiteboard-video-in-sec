@@ -131,6 +131,19 @@ function drawStroke(
   ctx.restore();
 }
 
+/** Path2D per `d` is stable across frames — build once. */
+const path2dCache = new Map<string, Path2D>();
+const path2dFor = (d: string): Path2D => {
+  let p = path2dCache.get(d);
+  if (!p) {
+    p = new Path2D(d);
+    path2dCache.set(d, p);
+  }
+  return p;
+};
+
+const FILL_ALPHA = 0.9;
+
 function drawElement(
   ctx: CanvasRenderingContext2D,
   el: TimedElement,
@@ -141,8 +154,20 @@ function drawElement(
 ): void {
   if (sceneMs < el.revealAtMs) return;
   const box = elementBox(el, width, height);
+  const tMs = sceneMs - el.revealAtMs;
+  // Flat color fill fades in under the ink outline once the outline lands.
+  if (el.fill && tMs >= el.fill.startMs) {
+    const fadeIn = Math.min(1, (tMs - el.fill.startMs) / Math.max(el.fill.durationMs, 1));
+    ctx.save();
+    ctx.globalAlpha = FILL_ALPHA * fadeIn;
+    ctx.fillStyle = el.fill.color;
+    ctx.translate(box.left, box.top);
+    ctx.scale(box.sx, box.sy);
+    for (const d of el.fill.paths) ctx.fill(path2dFor(d));
+    ctx.restore();
+  }
   el.strokes.forEach((stroke, i) =>
-    drawStroke(ctx, stroke, sceneMs - el.revealAtMs, box, baseWidthPx, `${el.id}:${i}`),
+    drawStroke(ctx, stroke, tMs, box, baseWidthPx, `${el.id}:${i}`),
   );
   if (el.emphasis && sceneMs >= el.emphasis.startMs) {
     const box2 = emphasisBox(el, width, height);

@@ -1,9 +1,10 @@
 export const THEME = {
-  paper: "#FAF7F0",
+  /** Near-white board — the Simi reference is high-contrast clean white. */
+  paper: "#FFFFFF",
   ink: "#243038",
   accent: "#C0392B",
   /** Screen-space stroke width as a fraction of canvas height (non-scaling). */
-  strokeWidthFactor: 0.006,
+  strokeWidthFactor: 0.0075,
 } as const;
 
 /** Subtle paper grain via an inline feTurbulence tile. */

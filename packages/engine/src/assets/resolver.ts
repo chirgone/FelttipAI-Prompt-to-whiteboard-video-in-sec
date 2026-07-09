@@ -7,6 +7,8 @@ export interface ResolvedAsset {
   tag: string;
   /** SVG path `d` strings, stroke-only, in a 0 0 100 100 viewBox. */
   paths: string[];
+  /** Subset of `paths` forming the silhouette to flood with the element color. */
+  fillPaths: string[];
   matched: "exact" | "synonym" | "fallback";
   /** For fallback only: label to hand-write inside the box. */
   label?: string;
@@ -15,7 +17,7 @@ export interface ResolvedAsset {
 interface Manifest {
   strokeWidth: number;
   viewBox: string;
-  icons: Record<string, { file: string; synonyms: string[] }>;
+  icons: Record<string, { file: string; synonyms: string[]; fill?: number[] }>;
 }
 
 const iconsDir = new URL("../../assets/icons/", import.meta.url);
@@ -61,11 +63,18 @@ export function resolveAsset(requestedTag: string): ResolvedAsset {
   const tag = requestedTag.trim().toLowerCase();
   const m = loadManifest();
   if (m.icons[tag]) {
-    return { tag, paths: pathsFor(tag), matched: "exact" };
+    const paths = pathsFor(tag);
+    return { tag, paths, fillPaths: fillPathsFor(tag, paths), matched: "exact" };
   }
   const viaSynonym = synonymIndex?.get(tag);
   if (viaSynonym) {
-    return { tag: viaSynonym, paths: pathsFor(viaSynonym), matched: "synonym" };
+    const paths = pathsFor(viaSynonym);
+    return {
+      tag: viaSynonym,
+      paths,
+      fillPaths: fillPathsFor(viaSynonym, paths),
+      matched: "synonym",
+    };
   }
   warn(
     "assets",
@@ -74,7 +83,13 @@ export function resolveAsset(requestedTag: string): ResolvedAsset {
   return {
     tag: requestedTag,
     paths: FALLBACK_BOX_PATHS,
+    fillPaths: [],
     matched: "fallback",
     label: requestedTag,
   };
+}
+
+function fillPathsFor(tag: string, paths: string[]): string[] {
+  const indices = loadManifest().icons[tag]?.fill ?? [];
+  return indices.flatMap((i) => (paths[i] !== undefined ? [paths[i]] : []));
 }
