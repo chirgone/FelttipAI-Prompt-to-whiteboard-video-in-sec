@@ -1,5 +1,5 @@
 import { createCanvas, Path2D, type Canvas } from "@napi-rs/canvas";
-import type { TimedPlan } from "@chalkline/engine";
+import type { TimedPlan } from "@felttip/engine";
 import {
   drawSceneDirty,
   drawSceneFrame,

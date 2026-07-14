@@ -1,5 +1,5 @@
 import { Easing, interpolate } from "remotion";
-import type { TimedElement, TimedScene, TimedStroke } from "@chalkline/engine";
+import type { TimedElement, TimedScene, TimedStroke } from "@felttip/engine";
 import { THEME } from "./theme";
 
 export const WIPE_MS = 300;

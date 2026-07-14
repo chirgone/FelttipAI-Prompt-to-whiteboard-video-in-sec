@@ -5,16 +5,16 @@ import path from "node:path";
 
 /**
  * Locate the fastest usable ffmpeg. Preference order (2026-07-09 decision):
- * 1. $CHALKLINE_FFMPEG (explicit override)
+ * 1. $FELTTIP_FFMPEG (explicit override)
  * 2. System ffmpeg with libx264 — a normal distro build encodes ~4× faster
  *    than the bundled one (whose libx264 lacks asm optimizations).
  * 3. Remotion's bundled compositor ffmpeg (always present, always works).
  */
 export function ffmpegPath(): string {
-  const override = process.env.CHALKLINE_FFMPEG;
+  const override = process.env.FELTTIP_FFMPEG;
   if (override) {
     if (!existsSync(override)) {
-      throw new Error(`render: CHALKLINE_FFMPEG points to a missing file: ${override}`);
+      throw new Error(`render: FELTTIP_FFMPEG points to a missing file: ${override}`);
     }
     return override;
   }

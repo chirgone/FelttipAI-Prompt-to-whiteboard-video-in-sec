@@ -1,11 +1,11 @@
 {
-  "name": "@chalkline/renderer",
+  "name": "@felttip/renderer",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "main": "src/index.ts",
   "devDependencies": {
-    "@chalkline/engine": "workspace:*",
+    "@felttip/engine": "workspace:*",
     "@types/node": "^20.14.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0"

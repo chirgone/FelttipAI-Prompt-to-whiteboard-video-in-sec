@@ -1,5 +1,5 @@
 {
-  "name": "chalkline",
+  "name": "felttip",
   "private": true,
   "version": "0.0.1",
   "packageManager": "pnpm@10.30.1",
@@ -9,7 +9,7 @@
   "scripts": {
     "typecheck": "tsc -p packages/engine && tsc -p packages/renderer && tsc -p packages/cli && tsc -p packages/api",
     "demo": "tsx packages/cli/src/index.ts run fixtures/sample-pitch.md",
-    "chalkline": "tsx packages/cli/src/index.ts",
+    "felttip": "tsx packages/cli/src/index.ts",
     "api": "tsx packages/api/src/index.ts"
   },
   "devDependencies": {

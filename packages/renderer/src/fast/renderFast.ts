@@ -5,7 +5,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import { Worker } from "node:worker_threads";
-import type { TimedPlan, TimedScene } from "@chalkline/engine";
+import type { TimedPlan, TimedScene } from "@felttip/engine";
 import type { RenderResult } from "../render";
 import { detectEncoder } from "./encoder";
 import { ffmpegPath } from "./ffmpegPath";

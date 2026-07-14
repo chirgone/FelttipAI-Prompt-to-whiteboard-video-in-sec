@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useCurrentFrame, useVideoConfig } from "remotion";
-import type { TimedScene } from "@chalkline/engine";
+import type { TimedScene } from "@felttip/engine";
 import { drawSceneFrame, type Path2DLike } from "./draw";
 
 /** Path2D per `d` is stable across frames — build once. */

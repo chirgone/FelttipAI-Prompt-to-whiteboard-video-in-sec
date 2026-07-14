@@ -39,13 +39,13 @@ let cached: EncoderKind | undefined;
 
 /**
  * Pick the fastest working encoder for this machine, once per process:
- * CHALKLINE_ENCODER overrides; otherwise probe an actual 1-frame VAAPI
+ * FELTTIP_ENCODER overrides; otherwise probe an actual 1-frame VAAPI
  * encode (driver quirks make anything less than a real encode unreliable)
  * and fall back to libx264.
  */
 export async function detectEncoder(ffmpeg: string): Promise<EncoderKind> {
   if (cached) return cached;
-  const override = process.env.CHALKLINE_ENCODER;
+  const override = process.env.FELTTIP_ENCODER;
   if (override === "vaapi" || override === "x264") {
     cached = override;
     return cached;

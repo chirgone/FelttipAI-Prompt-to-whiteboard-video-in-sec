@@ -1,6 +1,6 @@
-# Chalkline Architecture
+# Felttip Architecture
 
-Chalkline converts a document or prompt into a whiteboard-style explainer
+Felttip converts a document or prompt into a whiteboard-style explainer
 video. The core bet: **no pixel video generation**. An LLM produces a compact,
 schema-validated plan of scenes; a deterministic renderer draws it. This makes
 output reproducible, debuggable, cheap (one LLM call per video), and fast.
@@ -14,7 +14,7 @@ file/prompt ─▶ Ingest ─▶ Plan ─▶ Narrate ─▶ Render(Animate) ─�
 ```
 
 Every stage is a pure function in `packages/engine`, runnable standalone via
-`pnpm chalkline <stage>`, writing its artifact into `runs/<timestamp>/` so any
+`pnpm felttip <stage>`, writing its artifact into `runs/<timestamp>/` so any
 intermediate can be inspected on disk.
 
 ### 1. Ingest — `stages/ingest.ts`

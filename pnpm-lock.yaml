@@ -17,15 +17,15 @@ importers:
 
   packages/api:
     dependencies:
-      '@chalkline/engine':
-        specifier: workspace:*
-        version: link:../engine
-      '@chalkline/renderer':
-        specifier: workspace:*
-        version: link:../renderer
       '@fastify/multipart':
         specifier: ^10.0.0
         version: 10.0.0
+      '@felttip/engine':
+        specifier: workspace:*
+        version: link:../engine
+      '@felttip/renderer':
+        specifier: workspace:*
+        version: link:../renderer
       dotenv:
         specifier: ^17.4.2
         version: 17.4.2
@@ -39,10 +39,10 @@ importers:
 
   packages/cli:
     dependencies:
-      '@chalkline/engine':
+      '@felttip/engine':
         specifier: workspace:*
         version: link:../engine
-      '@chalkline/renderer':
+      '@felttip/renderer':
         specifier: workspace:*
         version: link:../renderer
       dotenv:
@@ -105,7 +105,7 @@ importers:
         specifier: ^4.0.484
         version: 4.0.484(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
     devDependencies:
-      '@chalkline/engine':
+      '@felttip/engine':
         specifier: workspace:*
         version: link:../engine
       '@types/node':

@@ -1,6 +1,6 @@
 /**
  * Generates packages/engine/assets/icons/*.svg + manifest.json from the path
- * table below. Run: pnpm --filter @chalkline/engine icons
+ * table below. Run: pnpm --filter @felttip/engine icons
  *
  * Icon rules: viewBox 0 0 100 100, stroke paths, stroke-width 5, currentColor,
  * hand-drawn line-art feel, ~8-unit margin. `fill` lists the indices of paths

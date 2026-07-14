@@ -1,7 +1,7 @@
 import { spawn } from "node:child_process";
 import { once } from "node:events";
 import { parentPort, workerData } from "node:worker_threads";
-import type { TimedPlan } from "@chalkline/engine";
+import type { TimedPlan } from "@felttip/engine";
 import { RawAviStream } from "./aviStream";
 import { encoderArgs, type EncoderKind } from "./encoder";
 import { ffmpegPath } from "./ffmpegPath";

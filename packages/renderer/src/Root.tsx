@@ -1,11 +1,11 @@
 import React from "react";
 import { Composition } from "remotion";
-import type { TimedPlan } from "@chalkline/engine";
+import type { TimedPlan } from "@felttip/engine";
 import { Whiteboard } from "./Whiteboard";
 
 /** Placeholder so the composition mounts without input props. */
 const DEFAULT_PLAN: TimedPlan = {
-  title: "Chalkline",
+  title: "Felttip",
   language: "en",
   aspectRatio: "16:9",
   width: 1920,
@@ -16,7 +16,7 @@ const DEFAULT_PLAN: TimedPlan = {
     {
       id: "s1",
       layout: "center",
-      narration: "Chalkline placeholder",
+      narration: "Felttip placeholder",
       startMs: 0,
       durationMs: 3000,
       words: [],
@@ -24,7 +24,7 @@ const DEFAULT_PLAN: TimedPlan = {
         {
           id: "s1e1",
           kind: "text",
-          text: "Chalkline",
+          text: "Felttip",
           position: { x: 0.5, y: 0.5 },
           size: 0.12,
           revealAtMs: 200,
@@ -38,7 +38,7 @@ const DEFAULT_PLAN: TimedPlan = {
 
 export const Root: React.FC = () => (
   <Composition
-    id="Chalkline"
+    id="Felttip"
     component={Whiteboard}
     durationInFrames={90}
     fps={30}

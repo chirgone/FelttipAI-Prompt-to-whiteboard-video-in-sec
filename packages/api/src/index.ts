@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { createReadStream, existsSync } from "node:fs";
 import multipart from "@fastify/multipart";
-import { PlanOptionsSchema } from "@chalkline/engine";
+import { PlanOptionsSchema } from "@felttip/engine";
 import Fastify from "fastify";
 import { getJob, persistUpload, submitJob } from "./jobs.js";
 
@@ -93,7 +93,7 @@ function toPublic(id: string):
 
 app
   .listen({ port: PORT, host: "0.0.0.0" })
-  .then(() => console.log(`chalkline API on :${PORT}`))
+  .then(() => console.log(`felttip API on :${PORT}`))
   .catch((err: unknown) => {
     console.error(err);
     process.exit(1);

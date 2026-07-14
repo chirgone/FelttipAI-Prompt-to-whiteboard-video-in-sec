@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig } from "remotion";
-import type { TimedPlan } from "@chalkline/engine";
+import type { TimedPlan } from "@felttip/engine";
 import { WhiteboardCanvas } from "./WhiteboardCanvas";
 import { THEME } from "./theme";
 

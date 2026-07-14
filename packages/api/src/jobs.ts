@@ -8,8 +8,8 @@ import {
   plan,
   writeArtifact,
   type PlanOptions,
-} from "@chalkline/engine";
-import { renderVideo } from "@chalkline/renderer";
+} from "@felttip/engine";
+import { renderVideo } from "@felttip/renderer";
 
 export type JobStatus = "queued" | "running" | "done" | "error";
 

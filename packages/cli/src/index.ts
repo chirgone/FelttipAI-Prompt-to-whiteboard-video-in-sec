@@ -17,19 +17,19 @@ import {
   writeArtifact,
   type PlanOptions,
   type TimedPlan,
-} from "@chalkline/engine";
-import { renderVideo } from "@chalkline/renderer";
+} from "@felttip/engine";
+import { renderVideo } from "@felttip/renderer";
 
-const USAGE = `chalkline — whiteboard explainer video engine
+const USAGE = `felttip — whiteboard explainer video engine
 
 Usage:
-  chalkline ingest <file>                     file → source-document.json
-  chalkline ingest --prompt "<text>"          prompt → source-document.json
-  chalkline plan <source-document.json> [--duration 1|2|3|5] [--language en]
+  felttip ingest <file>                     file → source-document.json
+  felttip ingest --prompt "<text>"          prompt → source-document.json
+  felttip plan <source-document.json> [--duration 1|2|3|5] [--language en]
                  [--aspect 16:9|9:16|1:1] [--voice <name>]
-  chalkline narrate <sceneplan.json> [--voice <name>]   TTS + word timestamps
-  chalkline render <sceneplan.json|timedplan.json>   MP4 (silent for sceneplans)
-  chalkline run <file|--prompt "<text>"> [plan options]  full pipeline → out.mp4
+  felttip narrate <sceneplan.json> [--voice <name>]   TTS + word timestamps
+  felttip render <sceneplan.json|timedplan.json>   MP4 (silent for sceneplans)
+  felttip run <file|--prompt "<text>"> [plan options]  full pipeline → out.mp4
 
 Artifacts are written to runs/<timestamp>/.`;
 

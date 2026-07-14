@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { bundle } from "@remotion/bundler";
 import { renderMedia, renderStill, selectComposition } from "@remotion/renderer";
-import type { TimedPlan } from "@chalkline/engine";
+import type { TimedPlan } from "@felttip/engine";
 import { renderVideoFast } from "./fast/renderFast";
 
 export interface RenderResult {
@@ -17,7 +17,7 @@ export interface RenderResult {
 /**
  * TimedPlan (+ narration audio already sitting in runDir) → out.mp4 +
  * thumbnail.png. Defaults to the fast Node renderer (@napi-rs/canvas +
- * Remotion's bundled ffmpeg, no browser); set CHALKLINE_RENDERER=remotion to
+ * Remotion's bundled ffmpeg, no browser); set FELTTIP_RENDERER=remotion to
  * use the original headless-Chrome pipeline (same draw.ts math, ~10× slower —
  * kept as a reference/fallback).
  */
@@ -25,7 +25,7 @@ export async function renderVideo(
   plan: TimedPlan,
   runDir: string,
 ): Promise<RenderResult> {
-  return process.env.CHALKLINE_RENDERER === "remotion"
+  return process.env.FELTTIP_RENDERER === "remotion"
     ? renderVideoRemotion(plan, runDir)
     : renderVideoFast(plan, runDir);
 }
@@ -53,7 +53,7 @@ export async function renderVideoRemotion(
   const inputProps = { plan };
   const composition = await selectComposition({
     serveUrl,
-    id: "Chalkline",
+    id: "Felttip",
     inputProps,
   });
 

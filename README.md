@@ -1,13 +1,13 @@
-# Chalkline
+# Felttip
 
 Turn any document or prompt into a hand-drawn whiteboard explainer video — with narration, synced drawing, and colored icons — from a single command.
 
 ```bash
-pnpm chalkline run --prompt "Explain how photosynthesis works" --duration 2
+pnpm felttip run --prompt "Explain how photosynthesis works" --duration 2
 # → runs/<timestamp>/out.mp4
 ```
 
-Chalkline is **not** pixel video generation. An LLM plans the video as structured JSON (scenes, elements, narration); everything after that — text-to-speech, stroke drawing, encoding — is deterministic, local, and free. Same plan in, same video out.
+Felttip is **not** pixel video generation. An LLM plans the video as structured JSON (scenes, elements, narration); everything after that — text-to-speech, stroke drawing, encoding — is deterministic, local, and free. Same plan in, same video out.
 
 ## How it works
 
@@ -38,7 +38,7 @@ Every stage writes its artifact to `runs/<timestamp>/`, so you can inspect, edit
 **Setup**
 
 ```bash
-git clone <this-repo> && cd chalkline
+git clone <this-repo> && cd felttip
 pnpm install
 cp .env.example .env    # add your OPENROUTER_API_KEY
 ```
@@ -56,13 +56,13 @@ Open `runs/<timestamp>/out.mp4`. That's the whole loop.
 ### From a prompt
 
 ```bash
-pnpm chalkline run --prompt "What is compound interest?" --duration 1
+pnpm felttip run --prompt "What is compound interest?" --duration 1
 ```
 
 ### From a document
 
 ```bash
-pnpm chalkline run pitch.pdf --duration 3 --aspect 9:16
+pnpm felttip run pitch.pdf --duration 3 --aspect 9:16
 ```
 
 Supported inputs: `.pdf`, `.docx`, `.pptx`, `.md`, `.txt`.
@@ -81,10 +81,10 @@ Supported inputs: `.pdf`, `.docx`, `.pptx`, `.md`, `.txt`.
 Each stage is a pure function with a JSON artifact in and out — great for iterating on one stage without paying for the others:
 
 ```bash
-pnpm chalkline ingest deck.pptx                      # → source-document.json
-pnpm chalkline plan runs/<ts>/source-document.json   # → sceneplan.json  (the only LLM call)
-pnpm chalkline narrate runs/<ts>/sceneplan.json      # → timedplan.json + mp3s
-pnpm chalkline render runs/<ts>/timedplan.json       # → out.mp4
+pnpm felttip ingest deck.pptx                      # → source-document.json
+pnpm felttip plan runs/<ts>/source-document.json   # → sceneplan.json  (the only LLM call)
+pnpm felttip narrate runs/<ts>/sceneplan.json      # → timedplan.json + mp3s
+pnpm felttip render runs/<ts>/timedplan.json       # → out.mp4
 ```
 
 You can hand-edit `sceneplan.json` between stages — it's validated against a Zod schema, and the renderer draws exactly what it says. `render` also accepts a bare `sceneplan.json` to produce a silent video.
@@ -107,8 +107,8 @@ All config lives in `.env` (see `.env.example`):
 |---|---|
 | `OPENROUTER_API_KEY` | **Required.** The only paid dependency in the project. |
 | `LLM_MODEL` | Planner model. Default `google/gemini-3.1-flash-lite` (fast, ~$0.001/video). Any OpenRouter model id works — e.g. `anthropic/claude-sonnet-4.5` plans denser, richer videos at higher cost. |
-| `CHALKLINE_FFMPEG` | Path to a specific ffmpeg binary. Otherwise Chalkline probes your PATH and falls back to the bundled encoder. |
-| `CHALKLINE_RENDERER` | Set to `remotion` to use the headless-Chrome render path instead of the default fast Node rasterizer. |
+| `FELTTIP_FFMPEG` | Path to a specific ffmpeg binary. Otherwise Felttip probes your PATH and falls back to the bundled encoder. |
+| `FELTTIP_RENDERER` | Set to `remotion` to use the headless-Chrome render path instead of the default fast Node rasterizer. |
 
 ## Quality & speed
 
@@ -121,7 +121,7 @@ All config lives in `.env` (see `.env.example`):
 ```
 packages/engine     pure pipeline library: ingest, plan, narrate, schemas, assets
 packages/renderer   drawing math + fast Node renderer + Remotion composition
-packages/cli        the chalkline CLI
+packages/cli        the felttip CLI
 packages/api        Fastify job server
 docs/architecture.md   the full design doc
 ```
