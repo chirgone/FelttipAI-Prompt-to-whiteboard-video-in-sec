@@ -50,7 +50,10 @@ deterministic from that JSON.
 - No hardcoded keys — `.env` only, gitignored (`.env.example` documents it).
 - No silent error swallowing. Sole sanctioned fallback: unresolved assetTag →
   "box + label", and it logs a warning.
-- No paid services beyond OpenRouter. No extra encoders (ffmpeg ships with Remotion).
+- No paid services beyond OpenRouter. No encoder *dependencies*: the renderer
+  prefers a system-installed ffmpeg when one exists (2026-07-09 decision — the
+  bundled build's x264 is ~4× slower), falls back to Remotion's bundled ffmpeg,
+  and never downloads/vendors its own encoder binary.
 
 ## Decisions log
 
@@ -65,3 +68,9 @@ deterministic from that JSON.
 - 2026-07-05: Edge TTS streams can close without `end`; collectors treat close/premature-close as completion.
 - 2026-07-05: The run directory doubles as Remotion's `publicDir`, so narration mp3s resolve via `staticFile()` with zero copying.
 - 2026-07-05: M5 verified — `pnpm demo` produced a 72s narrated MP4; claude-sonnet-4.5 returned a valid ScenePlan first try. Baseline timings: ingest 0.1s, plan 53.5s, narrate 8.7s, render 649.8s. Render is ~90% of wall clock; optimize there first (draft scale, jpeg frames).
+- 2026-07-09: Fast renderer is the default render path — no browser. Drawing math extracted to `packages/renderer/src/draw.ts` (shared verbatim by the Remotion composition and the Node renderer); worker threads each rasterize a contiguous frame range with @napi-rs/canvas and pipe raw-RGBA-in-AVI into Remotion's bundled ffmpeg (own h264 segment, identical codec params), final pass concats with `-c copy` + mixes narration (atrim/adelay/amix). 2:39 render: 37 min → 6.5 min on a 4-core laptop. `CHALKLINE_RENDERER=remotion` restores the headless-Chrome path.
+- 2026-07-09: Frames pipe as raw AVI, not PNG/JPEG: the trimmed Remotion ffmpeg has no rawvideo *demuxer*, its PNG path decodes at ~255ms/frame (zlib built -Os) and Skia's JPEG encode is ~500ms/frame — raw AVI + the enabled rawvideo *decoder* is a memcpy. `aviStream.ts` mirrors the byte layout that ffmpeg itself emits for `-c:v rawvideo -pix_fmt rgba -f avi`.
+- 2026-07-09: Paper-noise grain removed everywhere (theme, composition, fast renderer). It cost ~830ms/frame to rasterize in Skia-CPU and was provably invisible in output: empty-paper patches of the user-approved M9 video measure sd=0.00 after x264 yuv420p. Board is pure white (matches the Simi reference).
+- 2026-07-12: Plan model switched to `google/gemini-3.1-flash-lite` ($0.25/$1.50 per M vs Sonnet 4.5's $3/$15 — ~12×/10× cheaper), picked by racing cheap models on the real plan call. It needs the richness lint (below) — its first draft is thin — but lint+enrich lands 10 scenes/51 elements/23 colored icons in ~40s total, faster than Sonnet's 54s. Rejected: deepseek-v4-pro (reasoning model, ~360s/call), deepseek-v4-flash (~108s, half the scenes/icons of Sonnet), qwen3.5-flash (rich but ~200s), glm-4.7-flash (empty responses). Model stays env-driven via `LLM_MODEL`.
+- 2026-07-12: Plan stage got a visual-richness lint + one enrichment retry (`richnessShortfalls` in plan.ts): floors of ≥5 scenes/min (min 4), ≥5 elements/scene (4 for 1-min), ≥2 icons/scene — calibrated on the M9-approved Sonnet plans. Schema-valid-but-thin plans go back to the model once with the shortfall list; if enrichment doesn't reduce shortfalls, the original plan is kept (warned, never silent). Planner prompt states the same floors as HARD MINIMUMs plus a metaphor-icons-over-boxes rule.
+- 2026-07-09: The bundled libx264 is built without asm (~205ms CPU/frame at 1080p even on static content; preset changes barely matter). Decision (Shahnoor): prefer system ffmpeg when installed — `ffmpegPath()` probes PATH for an ffmpeg with libx264, `CHALKLINE_FFMPEG` overrides, bundled remains the zero-setup fallback.

@@ -79,6 +79,16 @@ const FEW_SHOT_2 = `{
   ]
 }`;
 
+/** Hard floor on scene count — shared by the prompt and the richness lint. */
+export function minSceneCount(durationMin: number): number {
+  return Math.max(4, durationMin * 5);
+}
+
+/** Hard floor on elements per scene — shared by the prompt and the richness lint. */
+export function minElementsPerScene(durationMin: number): number {
+  return durationMin === 1 ? 4 : 5;
+}
+
 export function plannerSystemPrompt(options: PlanOptions): string {
   const targetWords = options.durationMin * WORDS_PER_MINUTE;
   return `You are a visual teacher who plans whiteboard explainer videos. You turn a document into a ScenePlan: a sequence of scenes, each with narration (what the voice says) and elements (what gets drawn, in order, synced to the narration).
@@ -103,7 +113,7 @@ Element {
 }
 
 RULES
-1. One idea per scene. If a sentence introduces a new idea, it is a new scene.
+1. One idea per scene. If a sentence introduces a new idea, it is a new scene. HARD MINIMUM: at least ${minSceneCount(options.durationMin)} scenes for this video — many short scenes that keep wiping the board beat a few long static ones.
 2. Speak at ~130 words per minute. The whole video must total roughly ${targetWords} words of narration (target duration: ${options.durationMin} minute(s)). Narration is conversational, concrete, and vivid — a teacher at a whiteboard, not a press release.
 3. COLOR IS MANDATORY. Every icon gets a color (rotate blue, green, orange, purple, teal, red — vary within each scene; never two adjacent icons the same color). Icons are drawn as ink outlines and then flooded with their flat color, so colored icons pop like real marker drawings. Text stays "ink" except big numbers and key stats (red or blue). Use shade: true on the 1-2 icons the scene is really about. Never use yellow as an element color — it is only the highlighter tint that shade applies automatically.
 4. LABEL EVERY ICON. Each icon gets a text element with a 1-4 word label directly beneath it (label y ≈ icon y + icon size × 0.75, label size 0.028-0.045, textStyle "label"). An unlabeled icon is a mistake.
@@ -111,11 +121,12 @@ RULES
 6. SHOW A CONCRETE EXAMPLE. At least one mid-video scene must walk through a real worked example from the document — actual numbers, actual names — using number/big-number elements and arrows to show the steps. Show, don't just tell.
 7. Reveal timing: every element gets revealAtWord — the 0-based index of the narration word it should land on (the renderer starts the pen early so drawing completes on that word). Spread reveals across the whole narration; something should always be appearing. A label reveals 1-2 words after its icon. Drawing order must follow revealAtWord order.
 8. Composition: titles top-center (textStyle "title", y ≈ 0.12, only when a scene opens a new chapter of the story). Key scenes end with a short punchy takeaway label at the bottom (y ≈ 0.86, revealed on the closing words). Keep icon centers at least their combined sizes apart and everything inside 0.08-0.92. Icons ~0.1-0.28 tall, text 0.028-0.08.
-9. Density: 5-8 elements per scene for 16:9 (4-6 for 1-minute videos). A whiteboard fills up as its scene is spoken — one lonely icon on an empty board is a failure.
+9. Density: 5-8 elements per scene for 16:9 (4-6 for 1-minute videos), and HARD MINIMUM 2 icons in every scene. A whiteboard fills up as its scene is spoken — one lonely icon on an empty board is a failure.
 10. Use arrow/line with "to" to connect related elements — flows, causation, transformations. Layouts: "center" one hero concept; "grid" 3-6 peers; "timeline" steps left-to-right; "split" before/after halves; "flow" a vertical chain.
 11. Use emphasis ("circle" or "underline") on at most one element per scene — the one the scene exists to teach.
 12. assetTag: choose ONLY from the library list below. If nothing fits, use the closest tag — never invent one.
 13. Element ids are "<sceneId>e<n>". Scene ids are "s1", "s2", … durationHintSec ≈ narration word count ÷ 2.2.
+14. Prefer vivid metaphor icons over generic shapes — fire for danger, gift for rewards, lightbulb for ideas, flag for goals, warning for pitfalls, checkmark for wins. The board should look like a story, not a diagram; a box is a last resort, not a default.
 
 ASSET LIBRARY (the only legal assetTag values)
 ${ASSET_TAGS.join(", ")}
@@ -146,6 +157,21 @@ Document title: ${doc.title}
 ${sections}
 
 Return the ScenePlan JSON now.`;
+}
+
+export function plannerEnrichPrompt(
+  planJson: string,
+  shortfalls: string[],
+): string {
+  return `Your plan below is schema-valid but visually too thin — it would make a boring video.
+
+Your plan:
+${planJson}
+
+Shortfalls to fix (every one of them):
+${shortfalls.map((s) => `- ${s}`).join("\n")}
+
+Rewrite the ScenePlan fixing every shortfall: split long scenes into more short ones, add icons (each with a colored fill and a label beneath it), and keep something appearing on the board at all times. Keep the same story, narration voice, and total narration length. Return the full corrected ScenePlan JSON only.`;
 }
 
 export function plannerRetryPrompt(rawReply: string, zodErrors: string): string {

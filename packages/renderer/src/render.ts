@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import { bundle } from "@remotion/bundler";
 import { renderMedia, renderStill, selectComposition } from "@remotion/renderer";
 import type { TimedPlan } from "@chalkline/engine";
+import { renderVideoFast } from "./fast/renderFast";
 
 export interface RenderResult {
   videoPath: string;
@@ -15,10 +16,26 @@ export interface RenderResult {
 
 /**
  * TimedPlan (+ narration audio already sitting in runDir) → out.mp4 +
- * thumbnail.png, 30fps h264. runDir doubles as Remotion's public dir so
- * <Audio src={staticFile(scene.audioFile)}> resolves the per-scene mp3s.
+ * thumbnail.png. Defaults to the fast Node renderer (@napi-rs/canvas +
+ * Remotion's bundled ffmpeg, no browser); set CHALKLINE_RENDERER=remotion to
+ * use the original headless-Chrome pipeline (same draw.ts math, ~10× slower —
+ * kept as a reference/fallback).
  */
 export async function renderVideo(
+  plan: TimedPlan,
+  runDir: string,
+): Promise<RenderResult> {
+  return process.env.CHALKLINE_RENDERER === "remotion"
+    ? renderVideoRemotion(plan, runDir)
+    : renderVideoFast(plan, runDir);
+}
+
+/**
+ * Original Remotion pipeline: bundle → headless Chrome screenshots → encode.
+ * runDir doubles as Remotion's public dir so <Audio
+ * src={staticFile(scene.audioFile)}> resolves the per-scene mp3s.
+ */
+export async function renderVideoRemotion(
   plan: TimedPlan,
   runDir: string,
 ): Promise<RenderResult> {

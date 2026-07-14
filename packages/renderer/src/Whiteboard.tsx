@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile, useVideoConfig } from "remotion";
 import type { TimedPlan } from "@chalkline/engine";
 import { WhiteboardCanvas } from "./WhiteboardCanvas";
-import { PAPER_NOISE_URI, THEME } from "./theme";
+import { THEME } from "./theme";
 
 export const Whiteboard: React.FC<{ plan: TimedPlan }> = ({ plan }) => {
   const { fps } = useVideoConfig();
@@ -10,9 +10,6 @@ export const Whiteboard: React.FC<{ plan: TimedPlan }> = ({ plan }) => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: THEME.paper }}>
-      <AbsoluteFill
-        style={{ backgroundImage: `url("${PAPER_NOISE_URI}")`, backgroundRepeat: "repeat" }}
-      />
       {plan.scenes.map((scene, i) => (
         <Sequence
           key={scene.id}

@@ -1,6 +1,9 @@
 import { StageError, warn } from "../errors.js";
 import { complete, extractJSON } from "../llm.js";
 import {
+  minElementsPerScene,
+  minSceneCount,
+  plannerEnrichPrompt,
   plannerRetryPrompt,
   plannerSystemPrompt,
   plannerUserPrompt,
@@ -56,7 +59,76 @@ export async function plan(
     }
   }
 
-  return normalize(parsed.data, options);
+  let scenePlan = parsed.data;
+
+  // Schema-valid is not the same as watchable: cheap models under-draw unless
+  // pushed. Lint richness and give the model one shot at enriching its plan.
+  const shortfalls = richnessShortfalls(scenePlan, options);
+  if (shortfalls.length > 0) {
+    warn(
+      "plan",
+      `plan is schema-valid but visually thin, requesting enrichment:\n${shortfalls.join("\n")}`,
+    );
+    const enriched = await complete({
+      stage: "plan",
+      system,
+      user: `${user}\n\n${plannerEnrichPrompt(JSON.stringify(scenePlan), shortfalls)}`,
+      json: true,
+    });
+    const reparsed = ScenePlanSchema.safeParse(extractJSON(enriched, "plan"));
+    if (!reparsed.success) {
+      warn("plan", "enriched plan failed schema validation, keeping the original plan");
+    } else {
+      const remaining = richnessShortfalls(reparsed.data, options);
+      if (remaining.length >= shortfalls.length) {
+        warn(
+          "plan",
+          `enrichment did not improve richness (${remaining.length} shortfall(s) vs ${shortfalls.length}), keeping the original plan`,
+        );
+      } else {
+        if (remaining.length > 0) {
+          warn(
+            "plan",
+            `enriched plan still has ${remaining.length} shortfall(s), using it anyway:\n${remaining.join("\n")}`,
+          );
+        }
+        scenePlan = reparsed.data;
+      }
+    }
+  }
+
+  return normalize(scenePlan, options);
+}
+
+/**
+ * Visual-richness floors, calibrated on the Sonnet plans Shahnoor approved
+ * (M9 recursion: 12 scenes, ~8 elements and ~2.3 icons per scene). A plan
+ * below these floors renders as long static boards — boring, not broken.
+ */
+function richnessShortfalls(
+  scenePlan: ScenePlan,
+  options: PlanOptions,
+): string[] {
+  const shortfalls: string[] = [];
+  const minScenes = minSceneCount(options.durationMin);
+  if (scenePlan.scenes.length < minScenes) {
+    shortfalls.push(
+      `only ${scenePlan.scenes.length} scenes — need at least ${minScenes}; split ideas into more, shorter scenes`,
+    );
+  }
+  const minElements = minElementsPerScene(options.durationMin);
+  for (const scene of scenePlan.scenes) {
+    if (scene.elements.length < minElements) {
+      shortfalls.push(
+        `${scene.id}: only ${scene.elements.length} element(s) — need at least ${minElements}`,
+      );
+    }
+    const icons = scene.elements.filter((el) => el.kind === "icon").length;
+    if (icons < 2) {
+      shortfalls.push(`${scene.id}: only ${icons} icon(s) — need at least 2, each labeled and colored`);
+    }
+  }
+  return shortfalls;
 }
 
 /** Deterministic post-validation repairs; each one logs. */
