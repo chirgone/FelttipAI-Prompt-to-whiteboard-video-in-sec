@@ -1,0 +1,19 @@
+.gitignore
+  s_951cf48e08fd97::t_dff125c6b963bf 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "d68b74a567b13f512791c38e3fdaf8090de6c86a",
+  "prompts": {},
+  "sessions": {
+    "s_951cf48e08fd97": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_069315609ffeNWss1vxP3W35A8",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Ivan Anguiano <janguiano@cloudflare.com>"
+    }
+  }
+}
