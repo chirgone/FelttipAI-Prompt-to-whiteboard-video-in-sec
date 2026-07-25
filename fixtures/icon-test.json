@@ -1,0 +1,49 @@
+{
+  "title": "Test de iconos nuevos",
+  "language": "es",
+  "aspectRatio": "16:9",
+  "scenes": [
+    {
+      "id": "s1",
+      "narration": "Probando iconos nuevos, tanda uno: firewall, túnel VPN, candado abierto, rompecabezas, red neuronal, nube con candado.",
+      "durationHintSec": 8,
+      "layout": "grid",
+      "elements": [
+        { "id": "e1", "kind": "icon", "assetTag": "firewall", "color": "orange", "position": { "x": 0.17, "y": 0.3 }, "size": 0.22, "revealAtWord": 0 },
+        { "id": "e2", "kind": "icon", "assetTag": "vpn-tunnel", "color": "blue", "position": { "x": 0.5, "y": 0.3 }, "size": 0.2, "revealAtWord": 0 },
+        { "id": "e3", "kind": "icon", "assetTag": "padlock-open", "color": "red", "position": { "x": 0.83, "y": 0.3 }, "size": 0.18, "revealAtWord": 0 },
+        { "id": "e4", "kind": "icon", "assetTag": "puzzle-piece", "color": "purple", "position": { "x": 0.17, "y": 0.72 }, "size": 0.22, "revealAtWord": 0 },
+        { "id": "e5", "kind": "icon", "assetTag": "neural-net", "color": "teal", "position": { "x": 0.5, "y": 0.72 }, "size": 0.22, "revealAtWord": 0 },
+        { "id": "e6", "kind": "icon", "assetTag": "cloud-lock", "color": "green", "position": { "x": 0.83, "y": 0.72 }, "size": 0.2, "revealAtWord": 0 }
+      ]
+    },
+    {
+      "id": "s2",
+      "narration": "Tanda dos: red de nodos, bicho de vulnerabilidad, huella digital, teléfono con llave, router, alerta de sirena.",
+      "durationHintSec": 8,
+      "layout": "grid",
+      "elements": [
+        { "id": "e7", "kind": "icon", "assetTag": "network-nodes", "color": "blue", "position": { "x": 0.17, "y": 0.3 }, "size": 0.22, "revealAtWord": 0 },
+        { "id": "e8", "kind": "icon", "assetTag": "bug", "color": "red", "position": { "x": 0.5, "y": 0.3 }, "size": 0.2, "revealAtWord": 0 },
+        { "id": "e9", "kind": "icon", "assetTag": "fingerprint", "color": "orange", "position": { "x": 0.83, "y": 0.3 }, "size": 0.2, "revealAtWord": 0 },
+        { "id": "e10", "kind": "icon", "assetTag": "phone-key", "color": "green", "position": { "x": 0.17, "y": 0.72 }, "size": 0.22, "revealAtWord": 0 },
+        { "id": "e11", "kind": "icon", "assetTag": "router", "color": "purple", "position": { "x": 0.5, "y": 0.72 }, "size": 0.2, "revealAtWord": 0 },
+        { "id": "e12", "kind": "icon", "assetTag": "siren-alert", "color": "red", "position": { "x": 0.83, "y": 0.72 }, "size": 0.2, "revealAtWord": 0 }
+      ]
+    },
+    {
+      "id": "s3",
+      "narration": "Tanda tres: certificado, hash, api, robot, brújula, rack de servidores.",
+      "durationHintSec": 8,
+      "layout": "grid",
+      "elements": [
+        { "id": "e13", "kind": "icon", "assetTag": "certificate", "color": "blue", "position": { "x": 0.17, "y": 0.3 }, "size": 0.2, "revealAtWord": 0 },
+        { "id": "e14", "kind": "icon", "assetTag": "hash", "color": "teal", "position": { "x": 0.5, "y": 0.3 }, "size": 0.18, "revealAtWord": 0 },
+        { "id": "e15", "kind": "icon", "assetTag": "api", "color": "orange", "position": { "x": 0.83, "y": 0.3 }, "size": 0.18, "revealAtWord": 0 },
+        { "id": "e16", "kind": "icon", "assetTag": "robot", "color": "green", "position": { "x": 0.17, "y": 0.72 }, "size": 0.2, "revealAtWord": 0 },
+        { "id": "e17", "kind": "icon", "assetTag": "compass", "color": "purple", "position": { "x": 0.5, "y": 0.72 }, "size": 0.2, "revealAtWord": 0 },
+        { "id": "e18", "kind": "icon", "assetTag": "server-rack", "color": "blue", "position": { "x": 0.83, "y": 0.72 }, "size": 0.22, "revealAtWord": 0 }
+      ]
+    }
+  ]
+}

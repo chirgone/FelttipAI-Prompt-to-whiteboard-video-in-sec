@@ -1,0 +1,80 @@
+{
+  "title": "¿Cómo deberíamos definir la Inteligencia Artificial?",
+  "language": "es",
+  "aspectRatio": "16:9",
+  "scenes": [
+    {
+      "id": "s1",
+      "narration": "La Inteligencia Artificial se puede comparar con un aprendiz que absorbe información para tomar decisiones. Imagina a un asistente que, al interactuar con un cliente, puede aprender de sus necesidades y preferencias para ofrecer respuestas personalizadas.",
+      "durationHintSec": 17,
+      "layout": "flow",
+      "elements": [
+        { "id": "s1t", "kind": "text", "text": "¿Qué es la IA?", "textStyle": "title", "color": "blue", "position": { "x": 0.5, "y": 0.1 }, "size": 0.07, "revealAtWord": 0 },
+        { "id": "s1e1", "kind": "icon", "assetTag": "brain", "color": "blue", "position": { "x": 0.3, "y": 0.45 }, "size": 0.2, "revealAtWord": 6, "emphasis": "circle" },
+        { "id": "s1e2", "kind": "icon", "assetTag": "person", "color": "orange", "position": { "x": 0.55, "y": 0.45 }, "size": 0.16, "revealAtWord": 15 },
+        { "id": "s1e3", "kind": "icon", "assetTag": "speech-bubble", "color": "teal", "position": { "x": 0.72, "y": 0.4 }, "size": 0.14, "revealAtWord": 20 }
+      ]
+    },
+    {
+      "id": "s2",
+      "narration": "Ahora bien, consideremos la historia de cómo la IA se ha aplicado en la industria de la salud, donde se utiliza para analizar grandes cantidades de datos médicos y desarrollar tratamientos personalizados. La IA ha permitido a los médicos identificar patrones que no podrían detectar a simple vista, lo que ha mejorado significativamente la precisión en el diagnóstico y el tratamiento de enfermedades.",
+      "durationHintSec": 24,
+      "layout": "timeline",
+      "elements": [
+        { "id": "s2t", "kind": "text", "text": "IA en salud", "textStyle": "title", "color": "red", "position": { "x": 0.5, "y": 0.1 }, "size": 0.065, "revealAtWord": 0 },
+        { "id": "s2e1", "kind": "icon", "assetTag": "heart", "color": "red", "position": { "x": 0.22, "y": 0.45 }, "size": 0.18, "revealAtWord": 10 },
+        { "id": "s2e2", "kind": "arrow", "color": "ink", "position": { "x": 0.33, "y": 0.45 }, "to": { "x": 0.45, "y": 0.45 }, "size": 0.1, "revealAtWord": 20 },
+        { "id": "s2e3", "kind": "icon", "assetTag": "magnifier", "color": "blue", "position": { "x": 0.55, "y": 0.45 }, "size": 0.16, "revealAtWord": 30, "emphasis": "circle" },
+        { "id": "s2e4", "kind": "icon", "assetTag": "checkmark", "color": "green", "shade": true, "position": { "x": 0.78, "y": 0.45 }, "size": 0.14, "revealAtWord": 45 }
+      ]
+    },
+    {
+      "id": "s3",
+      "narration": "Y hay más, la IA también se puede comparar con un conductor experto que, al navegar por un camino desconocido, puede adaptarse a las condiciones del tráfico y del clima para llegar a su destino de manera segura y eficiente. En la industria de la logística, la IA se utiliza para optimizar las rutas de entrega y reducir costos, lo que ha permitido a las empresas mejorar su eficiencia y reducir su impacto ambiental.",
+      "durationHintSec": 28,
+      "layout": "timeline",
+      "elements": [
+        { "id": "s3t", "kind": "text", "text": "IA en logística", "textStyle": "title", "color": "orange", "position": { "x": 0.5, "y": 0.1 }, "size": 0.065, "revealAtWord": 0 },
+        { "id": "s3e1", "kind": "icon", "assetTag": "car", "color": "orange", "position": { "x": 0.22, "y": 0.45 }, "size": 0.18, "revealAtWord": 8 },
+        { "id": "s3e2", "kind": "arrow", "color": "ink", "position": { "x": 0.33, "y": 0.45 }, "to": { "x": 0.45, "y": 0.45 }, "size": 0.1, "revealAtWord": 25 },
+        { "id": "s3e3", "kind": "icon", "assetTag": "truck", "color": "blue", "position": { "x": 0.55, "y": 0.45 }, "size": 0.18, "revealAtWord": 33 },
+        { "id": "s3e4", "kind": "icon", "assetTag": "leaf", "color": "green", "shade": true, "position": { "x": 0.78, "y": 0.45 }, "size": 0.14, "revealAtWord": 48 }
+      ]
+    },
+    {
+      "id": "s4",
+      "narration": "Pero ojo con la complejidad de la IA, que se puede comparar con un rompecabezas que requiere piezas precisas para funcionar correctamente. La historia de cómo la IA se ha aplicado en la industria financiera es un ejemplo de esto, donde la IA se utiliza para analizar grandes cantidades de datos financieros y detectar patrones de fraude, lo que ha permitido a las instituciones financieras reducir sus riesgos y mejorar la seguridad de sus transacciones.",
+      "durationHintSec": 28,
+      "layout": "timeline",
+      "elements": [
+        { "id": "s4t", "kind": "text", "text": "IA en finanzas", "textStyle": "title", "color": "purple", "position": { "x": 0.5, "y": 0.1 }, "size": 0.065, "revealAtWord": 0 },
+        { "id": "s4e1", "kind": "icon", "assetTag": "puzzle-piece", "color": "purple", "position": { "x": 0.22, "y": 0.45 }, "size": 0.18, "revealAtWord": 8, "emphasis": "circle" },
+        { "id": "s4e2", "kind": "icon", "assetTag": "money", "color": "green", "position": { "x": 0.5, "y": 0.45 }, "size": 0.16, "revealAtWord": 25 },
+        { "id": "s4e3", "kind": "icon", "assetTag": "shield", "color": "blue", "shade": true, "position": { "x": 0.78, "y": 0.45 }, "size": 0.16, "revealAtWord": 45 }
+      ]
+    },
+    {
+      "id": "s5",
+      "narration": "Finalmente, la IA se puede comparar con un artista que, al crear una obra de arte, puede combinar diferentes técnicas y estilos para crear algo único y original. La historia de cómo la IA se ha aplicado en la industria del entretenimiento es un ejemplo de esto, donde la IA se utiliza para generar música, arte y contenido de video de manera autónoma, lo que ha permitido a los artistas y creativos explorar nuevos territorios y expandir las posibilidades de la expresión artística.",
+      "durationHintSec": 30,
+      "layout": "flow",
+      "elements": [
+        { "id": "s5t", "kind": "text", "text": "IA en creatividad", "textStyle": "title", "color": "teal", "position": { "x": 0.5, "y": 0.1 }, "size": 0.065, "revealAtWord": 0 },
+        { "id": "s5e1", "kind": "icon", "assetTag": "star", "color": "teal", "position": { "x": 0.28, "y": 0.45 }, "size": 0.18, "revealAtWord": 8 },
+        { "id": "s5e2", "kind": "icon", "assetTag": "lightbulb", "color": "orange", "position": { "x": 0.5, "y": 0.45 }, "size": 0.16, "revealAtWord": 28, "emphasis": "circle" },
+        { "id": "s5e3", "kind": "icon", "assetTag": "rocket", "color": "purple", "shade": true, "position": { "x": 0.72, "y": 0.45 }, "size": 0.18, "revealAtWord": 45 }
+      ]
+    },
+    {
+      "id": "s6",
+      "narration": "En resumen, la Inteligencia Artificial es una herramienta poderosa que puede ser definida como la capacidad de una máquina para aprender, razonar y actuar como un ser humano.",
+      "durationHintSec": 12,
+      "layout": "center",
+      "elements": [
+        { "id": "s6t", "kind": "text", "text": "En resumen", "textStyle": "title", "color": "green", "position": { "x": 0.5, "y": 0.15 }, "size": 0.075, "revealAtWord": 0 },
+        { "id": "s6e1", "kind": "icon", "assetTag": "brain", "color": "green", "position": { "x": 0.5, "y": 0.45 }, "size": 0.22, "revealAtWord": 4, "emphasis": "circle" },
+        { "id": "s6e2", "kind": "icon", "assetTag": "checkmark", "color": "green", "shade": true, "position": { "x": 0.5, "y": 0.72 }, "size": 0.14, "revealAtWord": 18 }
+      ]
+    }
+  ]
+}

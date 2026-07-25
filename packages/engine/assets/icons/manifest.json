@@ -689,7 +689,6 @@
         "backend",
         "infrastructure",
         "hosting-server",
-        "api",
         "compute",
         "system"
       ],
@@ -919,6 +918,96 @@
       "fill": [
         1
       ]
+    },
+    "firewall": {
+      "file": "firewall.svg",
+      "synonyms": ["waf", "protección de aplicaciones", "application firewall", "network firewall", "brick-wall"],
+      "fill": [0]
+    },
+    "vpn-tunnel": {
+      "file": "vpn-tunnel.svg",
+      "synonyms": ["vpn", "tunnel", "túnel", "conexión segura", "remote access", "secure connection"],
+      "fill": [0, 1]
+    },
+    "padlock-open": {
+      "file": "padlock-open.svg",
+      "synonyms": ["unlocked", "exposed", "vulnerable", "sin protección", "open access", "unprotected"],
+      "fill": [1]
+    },
+    "puzzle-piece": {
+      "file": "puzzle-piece.svg",
+      "synonyms": ["puzzle", "rompecabezas", "complexity", "pieces", "integration challenge"],
+      "fill": [0]
+    },
+    "neural-net": {
+      "file": "neural-net.svg",
+      "synonyms": ["neural network", "red neuronal", "deep learning", "layers", "capas"],
+      "fill": [0, 1, 2, 3, 4, 5, 6]
+    },
+    "cloud-lock": {
+      "file": "cloud-lock.svg",
+      "synonyms": ["cloud security", "seguridad en la nube", "protected cloud", "cloud protection"],
+      "fill": [0, 2]
+    },
+    "network-nodes": {
+      "file": "network-nodes.svg",
+      "synonyms": ["network", "red", "topology", "segmentation", "mesh", "segmentación"],
+      "fill": [0, 1, 2, 3, 4]
+    },
+    "bug": {
+      "file": "bug.svg",
+      "synonyms": ["vulnerability", "vulnerabilidad", "exploit", "security flaw"],
+      "fill": [0]
+    },
+    "fingerprint": {
+      "file": "fingerprint.svg",
+      "synonyms": ["biometric", "identity", "authentication", "huella", "identidad"],
+      "fill": []
+    },
+    "phone-key": {
+      "file": "phone-key.svg",
+      "synonyms": ["2fa", "mfa", "two-factor", "verificación en dos pasos", "otp"],
+      "fill": [0, 2]
+    },
+    "router": {
+      "file": "router.svg",
+      "synonyms": ["gateway", "network device", "enrutador"],
+      "fill": [0]
+    },
+    "siren-alert": {
+      "file": "siren-alert.svg",
+      "synonyms": ["incident", "breach", "security incident", "brecha", "alarma"],
+      "fill": [0]
+    },
+    "certificate": {
+      "file": "certificate.svg",
+      "synonyms": ["ssl", "tls", "certificado", "https"],
+      "fill": [0]
+    },
+    "hash": {
+      "file": "hash.svg",
+      "synonyms": ["hashing", "sha256", "checksum"],
+      "fill": []
+    },
+    "api": {
+      "file": "api.svg",
+      "synonyms": ["integration", "endpoint", "integración"],
+      "fill": []
+    },
+    "robot": {
+      "file": "robot.svg",
+      "synonyms": ["bot", "ai agent", "automation", "agente"],
+      "fill": [0]
+    },
+    "compass": {
+      "file": "compass.svg",
+      "synonyms": ["strategy", "direction", "roadmap", "guidance", "estrategia"],
+      "fill": [0, 1]
+    },
+    "server-rack": {
+      "file": "server-rack.svg",
+      "synonyms": ["datacenter", "infraestructura", "servidores"],
+      "fill": [0]
     }
   }
 }

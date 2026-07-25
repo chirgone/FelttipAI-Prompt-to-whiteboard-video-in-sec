@@ -5,14 +5,15 @@
  * steers it away from ink strokes, where it's unreadable on paper.
  */
 export const PALETTE = {
-  ink: "#1F2933",
-  blue: "#2563EB",
-  red: "#DC2626",
-  green: "#059669",
-  orange: "#EA580C",
-  purple: "#7C3AED",
-  teal: "#0D9488",
-  yellow: "#FACC15",
+  /** Tiza blanca -- default para pizarra oscura (era #1F2933, ilegible en fondo oscuro). */
+  ink: "#F4F1E8",
+  blue: "#7DB8FF",
+  red: "#FF8A80",
+  green: "#6FE3B4",
+  orange: "#FFB86B",
+  purple: "#C9A6FF",
+  teal: "#5FE0D0",
+  yellow: "#FFE066",
 } as const;
 
 export type PaletteColor = keyof typeof PALETTE;

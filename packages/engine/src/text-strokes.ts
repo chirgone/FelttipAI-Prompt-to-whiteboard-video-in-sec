@@ -23,10 +23,12 @@ interface HersheyModule {
 const require = createRequire(import.meta.url);
 const hershey = require("hersheytext") as HersheyModule;
 
-/** Single-line print font — reads like neat whiteboard marker writing. */
-const FONT = "ems_readability";
-/** Font units from baseline to cap top for this font. */
-const CAP_HEIGHT = 680;
+/** Serif single-stroke font -- comparado visualmente contra sans_med, sans_1 y
+ * ems_tech (2026-07-25): las 3 sans se leen "Comic Sans", esta se lee como
+ * texto tipografiado real. Verificado con tildes, ñ, ¿, ¡ (todos con trazo). */
+const FONT = "hershey_serif_med";
+/** Font units from baseline to cap top for este font (medido desde el glifo "H": 0-662). */
+const CAP_HEIGHT = 662;
 const SCALE = 100 / CAP_HEIGHT;
 /** Extra advance between glyphs, in font units. */
 const LETTER_SPACING = 60;

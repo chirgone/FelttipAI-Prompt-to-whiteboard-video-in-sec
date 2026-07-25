@@ -1,0 +1,48 @@
+{
+  "title": "Zero Trust: la pregunta que tu empresa no se ha hecho",
+  "language": "es",
+  "aspectRatio": "16:9",
+  "scenes": [
+    {
+      "id": "s1",
+      "narration": "Imaginate un banco donde, con solo mostrar tu identificación en la puerta principal, podés entrar a la bóveda, a las oficinas de gerencia y al archivo de todos los clientes. Así funciona una VPN tradicional: entrás una vez y tenés acceso a casi todo.",
+      "durationHintSec": 18,
+      "layout": "flow",
+      "elements": [
+        { "id": "s1t", "kind": "text", "text": "Una VPN tradicional", "textStyle": "title", "color": "blue", "position": { "x": 0.5, "y": 0.1 }, "size": 0.045, "revealAtWord": 0 },
+        { "id": "s1e1", "kind": "icon", "assetTag": "building", "color": "blue", "position": { "x": 0.5, "y": 0.32 }, "size": 0.22, "revealAtWord": 2 },
+        { "id": "s1e2", "kind": "icon", "assetTag": "key", "color": "orange", "position": { "x": 0.28, "y": 0.5 }, "size": 0.16, "revealAtWord": 8, "emphasis": "circle" },
+        { "id": "s1e3", "kind": "arrow", "color": "ink", "position": { "x": 0.38, "y": 0.5 }, "to": { "x": 0.48, "y": 0.5 }, "size": 0.1, "revealAtWord": 13 },
+        { "id": "s1e4", "kind": "icon", "assetTag": "database", "color": "purple", "shade": true, "position": { "x": 0.65, "y": 0.5 }, "size": 0.18, "revealAtWord": 25 },
+        { "id": "s1e5", "kind": "text", "text": "acceso a casi todo", "color": "red", "position": { "x": 0.5, "y": 0.72 }, "size": 0.05, "revealAtWord": 40 }
+      ]
+    },
+    {
+      "id": "s2",
+      "narration": "Zero Trust cambia esa lógica: en cada puerta te vuelven a pedir tu identificación, y solo entrás al lugar que de verdad necesitás para hacer tu trabajo. Si alguien roba una credencial, no se lleva las llaves de todo el edificio, se lleva la llave de una sola puerta.",
+      "durationHintSec": 19,
+      "layout": "timeline",
+      "elements": [
+        { "id": "s2t", "kind": "text", "text": "Zero Trust", "textStyle": "title", "color": "green", "position": { "x": 0.5, "y": 0.1 }, "size": 0.085, "revealAtWord": 0 },
+        { "id": "s2e1", "kind": "icon", "assetTag": "lock", "color": "green", "position": { "x": 0.25, "y": 0.4 }, "size": 0.18, "revealAtWord": 7 },
+        { "id": "s2e2", "kind": "icon", "assetTag": "key", "color": "orange", "position": { "x": 0.5, "y": 0.4 }, "size": 0.16, "revealAtWord": 13, "emphasis": "circle" },
+        { "id": "s2e3", "kind": "icon", "assetTag": "shield", "color": "green", "position": { "x": 0.75, "y": 0.4 }, "size": 0.18, "revealAtWord": 21 },
+        { "id": "s2e4", "kind": "icon", "assetTag": "warning", "color": "red", "shade": true, "position": { "x": 0.3, "y": 0.68 }, "size": 0.16, "revealAtWord": 29 },
+        { "id": "s2e5", "kind": "icon", "assetTag": "cross", "color": "red", "position": { "x": 0.55, "y": 0.68 }, "size": 0.14, "revealAtWord": 38 },
+        { "id": "s2e6", "kind": "text", "text": "solo una puerta, no todo el edificio", "color": "green", "position": { "x": 0.5, "y": 0.84 }, "size": 0.045, "revealAtWord": 40 }
+      ]
+    },
+    {
+      "id": "s3",
+      "narration": "La pregunta que vale la pena hacerse: si hoy alguien entra a tu red con una sola contraseña robada, ¿a cuántas puertas más puede llegar?",
+      "durationHintSec": 11,
+      "layout": "center",
+      "elements": [
+        { "id": "s3t", "kind": "text", "text": "¿Cuántas puertas más?", "textStyle": "title", "color": "red", "position": { "x": 0.5, "y": 0.15 }, "size": 0.04, "revealAtWord": 0 },
+        { "id": "s3e1", "kind": "icon", "assetTag": "person-question", "color": "ink", "position": { "x": 0.5, "y": 0.4 }, "size": 0.24, "revealAtWord": 1 },
+        { "id": "s3e2", "kind": "icon", "assetTag": "key", "color": "red", "shade": true, "position": { "x": 0.3, "y": 0.62 }, "size": 0.16, "revealAtWord": 17, "emphasis": "circle" },
+        { "id": "s3e3", "kind": "icon", "assetTag": "eye", "color": "orange", "position": { "x": 0.68, "y": 0.62 }, "size": 0.16, "revealAtWord": 20 }
+      ]
+    }
+  ]
+}
