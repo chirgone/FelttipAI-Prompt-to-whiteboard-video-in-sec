@@ -1,11 +1,13 @@
 import "dotenv/config";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { parseArgs } from "node:util";
 import {
   describeTimedPlan,
+  EdgeTTSProvider,
   ingest,
   narrate,
+  narrationCacheKey,
   newRunDir,
   plan,
   PlanOptionsSchema,
@@ -16,6 +18,7 @@ import {
   timed,
   writeArtifact,
   type PlanOptions,
+  type NarrationCache,
   type TimedPlan,
 } from "@felttip/engine";
 import { renderVideo } from "@felttip/renderer";
@@ -27,7 +30,8 @@ Usage:
   felttip ingest --prompt "<text>"          prompt → source-document.json
   felttip plan <source-document.json> [--duration 1|2|3|5] [--language en]
                  [--aspect 16:9|9:16|1:1] [--voice <name>]
-  felttip narrate <sceneplan.json> [--voice <name>]   TTS + word timestamps
+  felttip narrate <sceneplan.json> [--voice <name>] [--reuse <run|timedplan>]
+                                                TTS + word timestamps, with reuse
   felttip render <sceneplan.json|timedplan.json>   MP4 (silent for sceneplans)
   felttip run <file|--prompt "<text>"> [plan options]  full pipeline → out.mp4
 
@@ -143,16 +147,75 @@ async function cmdRender(argv: string[]): Promise<void> {
 async function cmdNarrate(argv: string[]): Promise<void> {
   const { values, positionals } = parseArgs({
     args: argv,
-    options: { voice: { type: "string" } },
+    options: {
+      voice: { type: "string" },
+      reuse: { type: "string" },
+    },
     allowPositionals: true,
   });
   const planPath = requirePositional(positionals, "sceneplan.json");
   const scenePlan = ScenePlanSchema.parse(JSON.parse(readFileSync(planPath, "utf8")));
   const voice = values.voice ?? PlanOptionsSchema.parse({}).voice;
   const runDir = newRunDir();
-  const { result } = await timed("narrate", () => narrate(scenePlan, runDir, voice));
+  const reuse = values.reuse ? loadNarrationCache(values.reuse, voice) : new Map();
+  if (reuse.size) console.log(`Reusing up to ${reuse.size} narration segment(s) from ${values.reuse}`);
+  const { result } = await timed("narrate", () =>
+    narrate(scenePlan, runDir, voice, new EdgeTTSProvider(), reuse),
+  );
   writeArtifact(runDir, "timedplan.json", result);
   console.log(`Narrated: ${describeTimedPlan(result)}`);
+}
+
+function loadNarrationCache(inputPath: string, requestedVoice: string): NarrationCache {
+  const abs = path.resolve(inputPath);
+  if (!existsSync(abs)) throw new StageError("narrate", `reuse source does not exist: ${abs}`);
+  const baseDir = statSync(abs).isDirectory() ? abs : path.dirname(abs);
+  const timestampsPath = statSync(abs).isDirectory() || path.basename(abs) !== "timestamps.json"
+    ? path.join(baseDir, "timestamps.json")
+    : abs;
+  if (!existsSync(timestampsPath)) {
+    throw new StageError("narrate", `reuse source has no timestamps.json: ${baseDir}`);
+  }
+
+  const timedPlanPath = path.join(baseDir, "timedplan.json");
+  const priorPlan = existsSync(timedPlanPath)
+    ? JSON.parse(readFileSync(timedPlanPath, "utf8")) as TimedPlan
+    : null;
+  const narrationByScene = new Map(
+    (priorPlan?.scenes ?? []).map((scene) => [scene.id, scene.narration]),
+  );
+  const audioByScene = new Map(
+    (priorPlan?.scenes ?? []).map((scene) => [scene.id, scene.audioFile]),
+  );
+  const timestamps = JSON.parse(readFileSync(timestampsPath, "utf8")) as Record<
+    string,
+    {
+      durationMs: number;
+      source: string;
+      words: TimedPlan["scenes"][number]["words"];
+      narration?: string;
+      voice?: string;
+    }
+  >;
+  const cache: NarrationCache = new Map();
+  for (const [sceneId, entry] of Object.entries(timestamps)) {
+    const narration = entry.narration ?? narrationByScene.get(sceneId);
+    if (!narration || (entry.voice && entry.voice !== requestedVoice)) continue;
+    const relativeAudio = audioByScene.get(sceneId) ?? `narration/${sceneId}.mp3`;
+    if (!relativeAudio) continue;
+    const audioPath = path.resolve(baseDir, relativeAudio);
+    if (!existsSync(audioPath)) continue;
+    const voice = entry.voice ?? requestedVoice;
+    cache.set(narrationCacheKey(narration, voice), {
+      narration,
+      voice,
+      audioPath,
+      durationMs: entry.durationMs,
+      words: entry.words,
+      source: entry.source,
+    });
+  }
+  return cache;
 }
 
 /** The full pipeline. `pnpm demo` is this on fixtures/sample-pitch.md. */

@@ -97,6 +97,25 @@
         1
       ]
     },
+    "robot": {
+      "file": "robot.svg",
+      "synonyms": [
+        "robot",
+        "bot",
+        "android",
+        "machine",
+        "automation",
+        "ai-agent"
+      ],
+      "fill": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        9
+      ]
+    },
     "lightbulb": {
       "file": "lightbulb.svg",
       "synonyms": [
@@ -524,6 +543,181 @@
         1
       ]
     },
+    "maze": {
+      "file": "maze.svg",
+      "synonyms": [
+        "maze",
+        "pathfinding",
+        "search-space",
+        "route-search",
+        "problem-space",
+        "laberinto"
+      ],
+      "fill": [
+        0
+      ]
+    },
+    "chess-knight": {
+      "file": "chess-knight.svg",
+      "synonyms": [
+        "chess",
+        "ajedrez",
+        "knight",
+        "strategy",
+        "game-tree",
+        "minimax"
+      ],
+      "fill": [
+        0
+      ]
+    },
+    "dice": {
+      "file": "dice.svg",
+      "synonyms": [
+        "probability",
+        "azar",
+        "chance",
+        "random",
+        "odds",
+        "bayes"
+      ],
+      "fill": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    "funnel": {
+      "file": "funnel.svg",
+      "synonyms": [
+        "filter",
+        "classifier",
+        "spam-filter",
+        "bayes-filter",
+        "triage",
+        "filtro"
+      ],
+      "fill": [
+        0
+      ]
+    },
+    "network-nodes": {
+      "file": "network-nodes.svg",
+      "synonyms": [
+        "neural-network",
+        "nodes",
+        "graph",
+        "conexion",
+        "neurons",
+        "red-neuronal"
+      ],
+      "fill": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "layers": {
+      "file": "layers.svg",
+      "synonyms": [
+        "layers",
+        "deep-learning",
+        "stack",
+        "model-depth",
+        "capas",
+        "multi-layer"
+      ],
+      "fill": [
+        0,
+        1,
+        2
+      ]
+    },
+    "bank": {
+      "file": "bank.svg",
+      "synonyms": [
+        "bank",
+        "banca",
+        "finance",
+        "financial",
+        "institution",
+        "branch"
+      ],
+      "fill": []
+    },
+    "cart": {
+      "file": "cart.svg",
+      "synonyms": [
+        "retail",
+        "shopping",
+        "store-cart",
+        "ecommerce",
+        "basket",
+        "carrito"
+      ],
+      "fill": []
+    },
+    "hospital": {
+      "file": "hospital.svg",
+      "synonyms": [
+        "health",
+        "salud",
+        "medical",
+        "clinic",
+        "patient-care",
+        "hospitalario"
+      ],
+      "fill": [
+        0,
+        1
+      ]
+    },
+    "bolt": {
+      "file": "bolt.svg",
+      "synonyms": [
+        "energy",
+        "energia",
+        "electricity",
+        "power-grid",
+        "lightning",
+        "electrico"
+      ],
+      "fill": [
+        0
+      ]
+    },
+    "antenna": {
+      "file": "antenna.svg",
+      "synonyms": [
+        "telco",
+        "antenna",
+        "radio",
+        "cell-tower",
+        "signal-tower",
+        "telecom"
+      ],
+      "fill": []
+    },
+    "compass": {
+      "file": "compass.svg",
+      "synonyms": [
+        "navigation",
+        "compass",
+        "direction",
+        "route",
+        "orientation",
+        "norte"
+      ],
+      "fill": [
+        0,
+        1
+      ]
+    },
     "email": {
       "file": "email.svg",
       "synonyms": [
@@ -689,6 +883,7 @@
         "backend",
         "infrastructure",
         "hosting-server",
+        "api",
         "compute",
         "system"
       ],
@@ -863,6 +1058,21 @@
         0
       ]
     },
+    "tag": {
+      "file": "tag.svg",
+      "synonyms": [
+        "tag",
+        "label",
+        "category",
+        "class",
+        "annotation",
+        "labeled"
+      ],
+      "fill": [
+        0,
+        1
+      ]
+    },
     "box": {
       "file": "box.svg",
       "synonyms": [
@@ -919,95 +1129,309 @@
         1
       ]
     },
-    "firewall": {
-      "file": "firewall.svg",
-      "synonyms": ["waf", "protección de aplicaciones", "application firewall", "network firewall", "brick-wall"],
-      "fill": [0]
-    },
-    "vpn-tunnel": {
-      "file": "vpn-tunnel.svg",
-      "synonyms": ["vpn", "tunnel", "túnel", "conexión segura", "remote access", "secure connection"],
-      "fill": [0, 1]
-    },
-    "padlock-open": {
-      "file": "padlock-open.svg",
-      "synonyms": ["unlocked", "exposed", "vulnerable", "sin protección", "open access", "unprotected"],
-      "fill": [1]
-    },
-    "puzzle-piece": {
-      "file": "puzzle-piece.svg",
-      "synonyms": ["puzzle", "rompecabezas", "complexity", "pieces", "integration challenge"],
-      "fill": [0]
-    },
-    "neural-net": {
-      "file": "neural-net.svg",
-      "synonyms": ["neural network", "red neuronal", "deep learning", "layers", "capas"],
-      "fill": [0, 1, 2, 3, 4, 5, 6]
-    },
-    "cloud-lock": {
-      "file": "cloud-lock.svg",
-      "synonyms": ["cloud security", "seguridad en la nube", "protected cloud", "cloud protection"],
-      "fill": [0, 2]
-    },
-    "network-nodes": {
-      "file": "network-nodes.svg",
-      "synonyms": ["network", "red", "topology", "segmentation", "mesh", "segmentación"],
-      "fill": [0, 1, 2, 3, 4]
+    "api": {
+      "file": "api.svg",
+      "synonyms": [
+        "api",
+        "endpoint",
+        "integracion",
+        "interface",
+        "servicio-web",
+        "conector"
+      ],
+      "fill": []
     },
     "bug": {
       "file": "bug.svg",
-      "synonyms": ["vulnerability", "vulnerabilidad", "exploit", "security flaw"],
-      "fill": [0]
+      "synonyms": [
+        "bug",
+        "malware",
+        "virus",
+        "exploit",
+        "codigo-malicioso",
+        "infeccion"
+      ],
+      "fill": [
+        0
+      ]
+    },
+    "worm": {
+      "file": "worm.svg",
+      "synonyms": [
+        "worm",
+        "gusano",
+        "auto-replicacion",
+        "propagacion",
+        "propagacion-automatica",
+        "malware-propagable"
+      ],
+      "fill": []
+    },
+    "trojan": {
+      "file": "trojan.svg",
+      "synonyms": [
+        "trojan",
+        "troyano",
+        "caballo-de-troya",
+        "malware-disfrazado",
+        "engaño-malicioso",
+        "archivo-falso"
+      ],
+      "fill": []
+    },
+    "fileless": {
+      "file": "fileless.svg",
+      "synonyms": [
+        "fileless",
+        "sin-archivo",
+        "malware-sin-archivo",
+        "memoria",
+        "ram",
+        "living-off-the-land"
+      ],
+      "fill": []
+    },
+    "phishing": {
+      "file": "phishing.svg",
+      "synonyms": [
+        "phishing",
+        "anzuelo",
+        "correo-falso",
+        "fraude-correo",
+        "spear-phishing",
+        "smishing",
+        "vishing"
+      ],
+      "fill": []
+    },
+    "ddos": {
+      "file": "ddos.svg",
+      "synonyms": [
+        "ddos",
+        "denegacion-de-servicio",
+        "denegación-de-servicio",
+        "saturacion",
+        "botnet",
+        "trafico-masivo"
+      ],
+      "fill": []
+    },
+    "ransomware": {
+      "file": "ransomware.svg",
+      "synonyms": [
+        "ransomware",
+        "rescate",
+        "extorsion",
+        "extorsión",
+        "cifrado-malicioso",
+        "doble-extorsion"
+      ],
+      "fill": []
+    },
+    "social-engineering": {
+      "file": "social-engineering.svg",
+      "synonyms": [
+        "ingenieria-social",
+        "ingeniería-social",
+        "ingenieria social",
+        "ingeniería social",
+        "suplantacion",
+        "suplantación",
+        "manipulacion",
+        "engaño-humano"
+      ],
+      "fill": []
+    },
+    "certificate": {
+      "file": "certificate.svg",
+      "synonyms": [
+        "certificate",
+        "certificado",
+        "cumplimiento",
+        "compliance",
+        "auditoria",
+        "norma",
+        "acreditacion"
+      ],
+      "fill": [
+        0
+      ]
+    },
+    "cloud-lock": {
+      "file": "cloud-lock.svg",
+      "synonyms": [
+        "cloud-security",
+        "nube-segura",
+        "cifrado-nube",
+        "datos-protegidos",
+        "seguridad-cloud"
+      ],
+      "fill": [
+        0
+      ]
     },
     "fingerprint": {
       "file": "fingerprint.svg",
-      "synonyms": ["biometric", "identity", "authentication", "huella", "identidad"],
+      "synonyms": [
+        "fingerprint",
+        "huella",
+        "biometria",
+        "identidad",
+        "robo de identidad",
+        "robo-identidad",
+        "dato-personal",
+        "pii",
+        "autenticacion"
+      ],
+      "fill": []
+    },
+    "firewall": {
+      "file": "firewall.svg",
+      "synonyms": [
+        "firewall",
+        "cortafuegos",
+        "perimetro",
+        "bloqueo",
+        "filtrado",
+        "control-preventivo"
+      ],
+      "fill": [
+        0
+      ]
+    },
+    "gate": {
+      "file": "gate.svg",
+      "synonyms": [
+        "gate",
+        "acl",
+        "access-control-list",
+        "lista-control-acceso",
+        "permitir-denegar",
+        "regla-ordenada",
+        "puerta-logica"
+      ],
+      "fill": []
+    },
+    "hash": {
+      "file": "hash.svg",
+      "synonyms": [
+        "hash",
+        "integridad",
+        "checksum",
+        "resumen",
+        "verificacion",
+        "huella-digital"
+      ],
+      "fill": []
+    },
+    "neural-net": {
+      "file": "neural-net.svg",
+      "synonyms": [
+        "neural-net",
+        "red-neuronal",
+        "feedforward",
+        "capas",
+        "deep-learning",
+        "perceptron"
+      ],
+      "fill": [
+        0
+      ]
+    },
+    "padlock-open": {
+      "file": "padlock-open.svg",
+      "synonyms": [
+        "padlock-open",
+        "candado-abierto",
+        "vulnerabilidad",
+        "sin-proteccion",
+        "expuesto",
+        "falsa-seguridad"
+      ],
       "fill": []
     },
     "phone-key": {
       "file": "phone-key.svg",
-      "synonyms": ["2fa", "mfa", "two-factor", "verificación en dos pasos", "otp"],
-      "fill": [0, 2]
+      "synonyms": [
+        "phone-key",
+        "mfa",
+        "doble-factor",
+        "autenticacion-movil",
+        "otp",
+        "segundo-factor"
+      ],
+      "fill": [
+        0
+      ]
+    },
+    "puzzle-piece": {
+      "file": "puzzle-piece.svg",
+      "synonyms": [
+        "puzzle",
+        "pieza",
+        "modular",
+        "integracion",
+        "encaje",
+        "interoperabilidad",
+        "componente"
+      ],
+      "fill": [
+        0
+      ]
     },
     "router": {
       "file": "router.svg",
-      "synonyms": ["gateway", "network device", "enrutador"],
-      "fill": [0]
-    },
-    "siren-alert": {
-      "file": "siren-alert.svg",
-      "synonyms": ["incident", "breach", "security incident", "brecha", "alarma"],
-      "fill": [0]
-    },
-    "certificate": {
-      "file": "certificate.svg",
-      "synonyms": ["ssl", "tls", "certificado", "https"],
-      "fill": [0]
-    },
-    "hash": {
-      "file": "hash.svg",
-      "synonyms": ["hashing", "sha256", "checksum"],
-      "fill": []
-    },
-    "api": {
-      "file": "api.svg",
-      "synonyms": ["integration", "endpoint", "integración"],
-      "fill": []
-    },
-    "robot": {
-      "file": "robot.svg",
-      "synonyms": ["bot", "ai agent", "automation", "agente"],
-      "fill": [0]
-    },
-    "compass": {
-      "file": "compass.svg",
-      "synonyms": ["strategy", "direction", "roadmap", "guidance", "estrategia"],
-      "fill": [0, 1]
+      "synonyms": [
+        "router",
+        "enrutador",
+        "gateway",
+        "red",
+        "trafico",
+        "enrutamiento"
+      ],
+      "fill": [
+        0
+      ]
     },
     "server-rack": {
       "file": "server-rack.svg",
-      "synonyms": ["datacenter", "infraestructura", "servidores"],
-      "fill": [0]
+      "synonyms": [
+        "server-rack",
+        "rack",
+        "centro-de-datos",
+        "datacenter",
+        "infraestructura",
+        "servidores"
+      ],
+      "fill": [
+        0
+      ]
+    },
+    "siren-alert": {
+      "file": "siren-alert.svg",
+      "synonyms": [
+        "siren",
+        "alerta",
+        "alarma",
+        "incidente",
+        "deteccion",
+        "emergencia",
+        "aviso"
+      ],
+      "fill": [
+        0
+      ]
+    },
+    "vpn-tunnel": {
+      "file": "vpn-tunnel.svg",
+      "synonyms": [
+        "vpn",
+        "tunel",
+        "cifrado-transito",
+        "conexion-segura",
+        "acceso-remoto"
+      ],
+      "fill": []
     }
   }
 }

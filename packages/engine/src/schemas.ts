@@ -72,7 +72,7 @@ export const PlanOptionsSchema = z.object({
     .default(2),
   language: z.string().default("en"),
   aspectRatio: AspectRatioSchema.default("16:9"),
-  voice: z.string().default("en-US-GuyNeural"),
+  voice: z.string().default("es-MX-JorgeNeural"),
 });
 export type PlanOptions = z.infer<typeof PlanOptionsSchema>;
 

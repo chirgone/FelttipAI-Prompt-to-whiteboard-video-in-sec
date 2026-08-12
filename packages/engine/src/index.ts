@@ -10,8 +10,16 @@ export * from "./timed.js";
 export * from "./geometry.js";
 export {
   resolveTimedPlan,
+  preflightTextOverflows,
   describeTimedPlan,
+  type TextOverflow,
   type SceneAudio,
 } from "./stages/timing.js";
-export { narrate } from "./stages/narrate.js";
+export {
+  narrate,
+  narrationCacheKey,
+  narrationHash,
+  type NarrationCache,
+  type NarrationCacheEntry,
+} from "./stages/narrate.js";
 export { EdgeTTSProvider, type TTSProvider, type TTSResult } from "./tts.js";

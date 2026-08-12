@@ -34,6 +34,7 @@ deterministic from that JSON.
 
 - `pnpm demo` — full pipeline on `fixtures/sample-pitch.md` (THE acceptance test)
 - `pnpm felttip <ingest|plan|narrate|render|run> …` — run any stage; artifacts → `runs/<timestamp>/`
+- `pnpm felttip narrate <sceneplan> --reuse <run|timedplan>` — rebuild strokes while reusing unchanged narration audio by voice+text hash.
 - `pnpm typecheck` — `tsc --noEmit` on all packages (run before every commit)
 - `pnpm api` — start the Fastify server
 
@@ -74,3 +75,5 @@ deterministic from that JSON.
 - 2026-07-12: Plan model switched to `google/gemini-3.1-flash-lite` ($0.25/$1.50 per M vs Sonnet 4.5's $3/$15 — ~12×/10× cheaper), picked by racing cheap models on the real plan call. It needs the richness lint (below) — its first draft is thin — but lint+enrich lands 10 scenes/51 elements/23 colored icons in ~40s total, faster than Sonnet's 54s. Rejected: deepseek-v4-pro (reasoning model, ~360s/call), deepseek-v4-flash (~108s, half the scenes/icons of Sonnet), qwen3.5-flash (rich but ~200s), glm-4.7-flash (empty responses). Model stays env-driven via `LLM_MODEL`.
 - 2026-07-12: Plan stage got a visual-richness lint + one enrichment retry (`richnessShortfalls` in plan.ts): floors of ≥5 scenes/min (min 4), ≥5 elements/scene (4 for 1-min), ≥2 icons/scene — calibrated on the M9-approved Sonnet plans. Schema-valid-but-thin plans go back to the model once with the shortfall list; if enrichment doesn't reduce shortfalls, the original plan is kept (warned, never silent). Planner prompt states the same floors as HARD MINIMUMs plus a metaphor-icons-over-boxes rule.
 - 2026-07-09: The bundled libx264 is built without asm (~205ms CPU/frame at 1080p even on static content; preset changes barely matter). Decision (Shahnoor): prefer system ffmpeg when installed — `ffmpegPath()` probes PATH for an ffmpeg with libx264, `FELTTIP_FFMPEG` overrides, bundled remains the zero-setup fallback.
+- 2026-08-12: Narration is incrementally reusable by voice+normalized-text hash via `narrate --reuse`. `timestamps.json` is checkpointed after every scene, so interruption does not discard completed TTS work. Visual-only edits rebuild strokes and the TimedPlan without synthesizing unchanged audio.
+- 2026-08-12: Exact Hershey text bounds are checked before the first TTS call. Long-form QC also blocks dangling visual phrases, sentence fragments across scene boundaries, bare one-letter labels, and excessive title/label repetition. Mechanical word/character truncation is forbidden; builders must emit complete editorial units.

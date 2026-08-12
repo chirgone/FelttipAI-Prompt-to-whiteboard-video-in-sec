@@ -38,6 +38,11 @@ export interface TextStrokes {
   viewBoxWidth: number;
 }
 
+export interface TextStrokeBounds extends TextStrokes {
+  minX: number;
+  maxX: number;
+}
+
 export function textToStrokePaths(text: string): TextStrokes {
   const glyphs = hershey.renderTextArray(text, { font: FONT });
   if (!glyphs) {
@@ -56,6 +61,29 @@ export function textToStrokePaths(text: string): TextStrokes {
   }
   const width = Math.max(1, (xCursor - LETTER_SPACING) * SCALE);
   return { paths, viewBoxWidth: Math.round(width * 10) / 10 };
+}
+
+export function textStrokeBounds(text: string): TextStrokeBounds {
+  const result = textToStrokePaths(text);
+  let minX = Infinity;
+  let maxX = -Infinity;
+  for (const path of result.paths) {
+    const tokens = path.match(/[ML]|-?\d+(?:\.\d+)?/g) ?? [];
+    for (let i = 0; i < tokens.length; i++) {
+      if (tokens[i] !== "M" && tokens[i] !== "L") continue;
+      const x = Number(tokens[i + 1]);
+      if (Number.isFinite(x)) {
+        minX = Math.min(minX, x);
+        maxX = Math.max(maxX, x);
+      }
+      i += 2;
+    }
+  }
+  return {
+    ...result,
+    minX: minX === Infinity ? 0 : minX,
+    maxX: maxX === -Infinity ? result.viewBoxWidth : maxX,
+  };
 }
 
 /** Flip y (font is y-up), scale to cap=100, advance by the x cursor. */

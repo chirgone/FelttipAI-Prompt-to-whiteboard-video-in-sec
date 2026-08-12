@@ -29,8 +29,14 @@ export async function complete(opts: {
   user: string;
   json?: boolean;
 }): Promise<string> {
+  // Cap max_tokens so free-tier OpenRouter accounts (limited credit balance)
+  // don't get rejected with 402. Override via LLM_MAX_TOKENS env if needed.
+  const maxTokens = process.env.LLM_MAX_TOKENS
+    ? Number(process.env.LLM_MAX_TOKENS)
+    : 32000;
   const res = await llmClient(opts.stage).chat.completions.create({
     model: getModel(),
+    max_tokens: maxTokens,
     messages: [
       { role: "system", content: opts.system },
       { role: "user", content: opts.user },

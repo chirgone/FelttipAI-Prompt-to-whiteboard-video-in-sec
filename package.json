@@ -8,6 +8,7 @@
   },
   "scripts": {
     "typecheck": "tsc -p packages/engine && tsc -p packages/renderer && tsc -p packages/cli && tsc -p packages/api",
+    "test": "tsx --test packages/engine/src/stages/narrate.test.ts",
     "demo": "tsx packages/cli/src/index.ts run fixtures/sample-pitch.md",
     "felttip": "tsx packages/cli/src/index.ts",
     "api": "tsx packages/api/src/index.ts"

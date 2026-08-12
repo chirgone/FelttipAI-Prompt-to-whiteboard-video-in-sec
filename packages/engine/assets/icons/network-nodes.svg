@@ -1,12 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M 20 25 A 5 5 0 1 0 30 25 A 5 5 0 1 0 20 25 Z"/>
-  <path d="M 70 20 A 5 5 0 1 0 80 20 A 5 5 0 1 0 70 20 Z"/>
-  <path d="M 45 45 A 5 5 0 1 0 55 45 A 5 5 0 1 0 45 45 Z"/>
-  <path d="M 15 70 A 5 5 0 1 0 25 70 A 5 5 0 1 0 15 70 Z"/>
-  <path d="M 75 75 A 5 5 0 1 0 85 75 A 5 5 0 1 0 75 75 Z"/>
-  <path d="M 25 25 L 45 45"/>
-  <path d="M 75 20 L 50 45"/>
-  <path d="M 50 45 L 20 70"/>
-  <path d="M 50 45 L 80 75"/>
-  <path d="M 25 70 L 75 75"/>
+  <path d="M 17 50 a 7 7 0 1 0 14 0 a 7 7 0 1 0 -14 0"/>
+  <path d="M 43 24 a 7 7 0 1 0 14 0 a 7 7 0 1 0 -14 0"/>
+  <path d="M 43 76 a 7 7 0 1 0 14 0 a 7 7 0 1 0 -14 0"/>
+  <path d="M 69 50 a 7 7 0 1 0 14 0 a 7 7 0 1 0 -14 0"/>
+  <path d="M 42 50 a 8 8 0 1 0 16 0 a 8 8 0 1 0 -16 0"/>
+  <path d="M 31 50 L 42 50"/>
+  <path d="M 58 50 L 69 50"/>
+  <path d="M 50 31 L 50 42"/>
+  <path d="M 50 58 L 50 69"/>
+  <path d="M 30 46 L 44 30"/>
+  <path d="M 56 30 L 70 46"/>
+  <path d="M 30 54 L 44 70"/>
+  <path d="M 56 70 L 70 54"/>
 </svg>

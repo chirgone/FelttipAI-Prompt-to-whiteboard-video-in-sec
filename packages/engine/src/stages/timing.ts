@@ -22,7 +22,7 @@ import {
   emphasisColor,
   resolveColor,
 } from "../palette.js";
-import { fitStrokes, textToStrokePaths } from "../text-strokes.js";
+import { fitStrokes, textStrokeBounds, textToStrokePaths } from "../text-strokes.js";
 import { ASPECT_DIMENSIONS, type Element, type Scene, type ScenePlan } from "../schemas.js";
 import {
   FPS,
@@ -51,6 +51,46 @@ export interface SceneAudio {
   audioFile: string;
   durationMs: number;
   words: WordTiming[];
+}
+
+export interface TextOverflow {
+  sceneId: string;
+  elementId: string;
+  text: string;
+  left: number;
+  right: number;
+  marginPx: number;
+}
+
+/** Exact Hershey-stroke bounds, available before any TTS work starts. */
+export function preflightTextOverflows(
+  plan: ScenePlan,
+  marginPx = 60,
+): TextOverflow[] {
+  const { width, height } = ASPECT_DIMENSIONS[plan.aspectRatio];
+  const overflows: TextOverflow[] = [];
+  for (const scene of plan.scenes) {
+    for (const element of scene.elements) {
+      if ((element.kind !== "text" && element.kind !== "number") || !element.text) continue;
+      const bounds = textStrokeBounds(element.text.trim());
+      const scale = (element.size * height) / 100;
+      const boxWidth = element.size * height * (bounds.viewBoxWidth / 100);
+      const boxLeft = element.position.x * width - boxWidth / 2;
+      const left = boxLeft + bounds.minX * scale;
+      const right = boxLeft + bounds.maxX * scale;
+      if (left < marginPx || right > width - marginPx) {
+        overflows.push({
+          sceneId: scene.id,
+          elementId: element.id,
+          text: element.text,
+          left: Math.round(left),
+          right: Math.round(right),
+          marginPx,
+        });
+      }
+    }
+  }
+  return overflows;
 }
 
 /**
@@ -195,6 +235,23 @@ function resolveElement(
   const pathLengths = measurePaths(paths);
   const size = placement?.size ?? el.size;
   const step = sampleStepFor(size, canvas.height);
+
+  // Text overflow detection: warn if text extends beyond canvas bounds
+  if ((el.kind === "text" || el.kind === "number") && viewBoxWidth !== undefined) {
+    const textWidthPx = size * canvas.height * (viewBoxWidth / 100);
+    const leftEdgePx = el.position.x * canvas.width - textWidthPx / 2;
+    const rightEdgePx = el.position.x * canvas.width + textWidthPx / 2;
+    const margin = canvas.width * 0.04; // 4% margin
+    if (leftEdgePx < margin || rightEdgePx > canvas.width - margin) {
+      warn(
+        "plan",
+        `${scene.id}/${el.id} text overflows canvas: "${el.text?.slice(0, 30)}..." ` +
+          `(width=${Math.round(textWidthPx)}px, canvas=${canvas.width}px, ` +
+          `left=${Math.round(leftEdgePx)}px, right=${Math.round(rightEdgePx)}px). ` +
+          `Reduce text length, size (${el.size}), or split into multiple lines.`,
+      );
+    }
+  }
   // Icons that get a color fill draw their outline in ink — colored strokes
   // on a same-color fill make interior detail (windows, hands, faces) vanish.
   const willFill =

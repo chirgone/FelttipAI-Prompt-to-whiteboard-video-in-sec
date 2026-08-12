@@ -74,7 +74,7 @@ Supported inputs: `.pdf`, `.docx`, `.pptx`, `.md`, `.txt`.
 | `--duration` | `1`, `2`, `3`, `5` (minutes) | `2` |
 | `--aspect` | `16:9`, `9:16`, `1:1` | `16:9` |
 | `--language` | any language code the model can write | `en` |
-| `--voice` | any [Edge TTS voice name](https://gist.github.com/BettyJJ/17cbaa1de96235a7f5773b8690a20462) | `en-US-GuyNeural` |
+| `--voice` | any [Edge TTS voice name](https://gist.github.com/BettyJJ/17cbaa1de96235a7f5773b8690a20462) | `es-MX-JorgeNeural` |
 
 ### Run stages individually
 
@@ -84,10 +84,13 @@ Each stage is a pure function with a JSON artifact in and out — great for iter
 pnpm felttip ingest deck.pptx                      # → source-document.json
 pnpm felttip plan runs/<ts>/source-document.json   # → sceneplan.json  (the only LLM call)
 pnpm felttip narrate runs/<ts>/sceneplan.json      # → timedplan.json + mp3s
+pnpm felttip narrate runs/<ts>/sceneplan.json --reuse runs/<prior-ts>
 pnpm felttip render runs/<ts>/timedplan.json       # → out.mp4
 ```
 
 You can hand-edit `sceneplan.json` between stages — it's validated against a Zod schema, and the renderer draws exactly what it says. `render` also accepts a bare `sceneplan.json` to produce a silent video.
+
+Use `--reuse` after visual-only edits or an interrupted narration run. Felttip reuses segments whose normalized narration and voice match, rebuilds visual strokes, and checkpoints `timestamps.json` after every scene.
 
 ### HTTP API
 
@@ -109,6 +112,7 @@ All config lives in `.env` (see `.env.example`):
 | `LLM_MODEL` | Planner model. Default `google/gemini-3.1-flash-lite` (fast, ~$0.001/video). Any OpenRouter model id works — e.g. `anthropic/claude-sonnet-4.5` plans denser, richer videos at higher cost. |
 | `FELTTIP_FFMPEG` | Path to a specific ffmpeg binary. Otherwise Felttip probes your PATH and falls back to the bundled encoder. |
 | `FELTTIP_RENDERER` | Set to `remotion` to use the headless-Chrome render path instead of the default fast Node rasterizer. |
+| `FELTTIP_THEME` | Renderer theme. Supported values: `blackboard` (default), `ivory-notebook`, `blueprint`. |
 
 ## Quality & speed
 
